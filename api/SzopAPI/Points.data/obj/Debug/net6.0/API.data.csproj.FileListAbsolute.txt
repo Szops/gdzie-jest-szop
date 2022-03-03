@@ -1,0 +1,12 @@
+C:\Projects\Github\gdzie-jest-szop\api\SzopAPI\Points.data\obj\Debug\net6.0\API.data.csproj.AssemblyReference.cache
+C:\Projects\Github\gdzie-jest-szop\api\SzopAPI\Points.data\obj\Debug\net6.0\API.data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\Github\gdzie-jest-szop\api\SzopAPI\Points.data\obj\Debug\net6.0\API.data.AssemblyInfoInputs.cache
+C:\Projects\Github\gdzie-jest-szop\api\SzopAPI\Points.data\obj\Debug\net6.0\API.data.AssemblyInfo.cs
+C:\Projects\Github\gdzie-jest-szop\api\SzopAPI\Points.data\obj\Debug\net6.0\API.data.csproj.CoreCompileInputs.cache
+C:\Projects\Github\gdzie-jest-szop\api\SzopAPI\Points.data\bin\Debug\net6.0\API.data.deps.json
+C:\Projects\Github\gdzie-jest-szop\api\SzopAPI\Points.data\bin\Debug\net6.0\API.data.dll
+C:\Projects\Github\gdzie-jest-szop\api\SzopAPI\Points.data\bin\Debug\net6.0\ref\API.data.dll
+C:\Projects\Github\gdzie-jest-szop\api\SzopAPI\Points.data\bin\Debug\net6.0\API.data.pdb
+C:\Projects\Github\gdzie-jest-szop\api\SzopAPI\Points.data\obj\Debug\net6.0\API.data.dll
+C:\Projects\Github\gdzie-jest-szop\api\SzopAPI\Points.data\obj\Debug\net6.0\ref\API.data.dll
+C:\Projects\Github\gdzie-jest-szop\api\SzopAPI\Points.data\obj\Debug\net6.0\API.data.pdb
