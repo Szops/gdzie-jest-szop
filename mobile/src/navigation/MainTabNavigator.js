@@ -7,6 +7,7 @@ import {tintColor} from '../constants/colors';
 
 import HelloSzopScreen from '../screens/HelloSzopScreen';
 import ReactNativeHelloScreen from '../screens/ReactNativeHelloScreen';
+import PointsListScreen from '../screens/PointsListScreen';
 
 export default function MainTabNavigator(props) {
   const Tab = createBottomTabNavigator();
@@ -26,6 +27,16 @@ export default function MainTabNavigator(props) {
             title: 'GdzieJestSZOP',
             tabBarIcon: ({color}) => (
               <Icon name="home" color={color} size={26} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="PointsListScreen"
+          component={PointsListScreen}
+          options={{
+            title: 'Lista punktów',
+            tabBarIcon: ({color}) => (
+              <Icon name="list" color={color} size={26} />
             ),
           }}
         />
