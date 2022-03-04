@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -8,10 +8,12 @@ import {tintColor} from '../constants/colors';
 import HelloSzopScreen from '../screens/HelloSzopScreen';
 import ReactNativeHelloScreen from '../screens/ReactNativeHelloScreen';
 import PointsListScreen from '../screens/PointsListScreen';
+import {LanguageContext} from '../context/LanguageContextProvider';
 
 const Tab = createBottomTabNavigator();
 
 export default function MainTabNavigator(props) {
+  const {text} = useContext(LanguageContext);
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -24,7 +26,7 @@ export default function MainTabNavigator(props) {
           name="HelloSZOP"
           component={HelloSzopScreen}
           options={{
-            title: 'GdzieJestSZOP',
+            title: text.appName,
             tabBarIcon: ({color}) => (
               <Icon name="home" color={color} size={26} />
             ),
@@ -34,7 +36,7 @@ export default function MainTabNavigator(props) {
           name="PointsListScreen"
           component={PointsListScreen}
           options={{
-            title: 'Lista punktów',
+            title: text.pointsList,
             tabBarIcon: ({color}) => (
               <Icon name="list" color={color} size={26} />
             ),
