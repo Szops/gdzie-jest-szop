@@ -5,10 +5,12 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {tintColor} from '../constants/colors';
 
-import HelloSzopScreen from '../screens/HelloSzopScreen';
+import HelloSzopScreen, {helloSzopScreenName} from '../screens/HelloSzopScreen';
 import ReactNativeHelloScreen from '../screens/ReactNativeHelloScreen';
-import PointsListScreen from '../screens/PointsListScreen';
-import MapScreen from '../screens/MapScreen';
+import PointsListScreen, {
+  PointsListScreenName,
+} from '../screens/PointsListScreen';
+import MapScreen, {mapScreenName} from '../screens/MapScreen';
 import {LanguageContext} from '../context/LanguageContextProvider';
 
 const Tab = createBottomTabNavigator();
@@ -24,7 +26,7 @@ export default function MainTabNavigator(props) {
         }}
         tabBarHideOnKeyboard={true}>
         <Tab.Screen
-          name="HelloSZOP"
+          name={helloSzopScreenName}
           component={HelloSzopScreen}
           options={{
             title: text.appName,
@@ -34,17 +36,17 @@ export default function MainTabNavigator(props) {
           }}
         />
         <Tab.Screen
-          name="MapScreen"
+          name={mapScreenName}
           component={MapScreen}
           options={{
-            title: 'Mapa punktów',
+            title: text.pointsMap,
             tabBarIcon: ({color}) => (
               <Icon name="map" color={color} size={26} />
             ),
           }}
         />
         <Tab.Screen
-          name="PointsListScreen"
+          name={PointsListScreenName}
           component={PointsListScreen}
           options={{
             title: text.pointsList,
