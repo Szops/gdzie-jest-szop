@@ -9,9 +9,9 @@ import HelloSzopScreen from '../screens/HelloSzopScreen';
 import ReactNativeHelloScreen from '../screens/ReactNativeHelloScreen';
 import PointsListScreen from '../screens/PointsListScreen';
 
-export default function MainTabNavigator(props) {
-  const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
+export default function MainTabNavigator(props) {
   return (
     <NavigationContainer>
       <Tab.Navigator
