@@ -12,6 +12,7 @@ import MainTabNavigator from './src/navigation/MainTabNavigator';
 import HelloSzopScreen from './src/screens/HelloSzopScreen';
 import ReactNativeHelloScreen from './src/screens/ReactNativeHelloScreen';
 import {tintColor} from './src/constants/colors';
+import PointsContextProvider from './src/context/PointsContextProvider';
 import LanguageContextProvider, {
   LanguageContext,
 } from './src/context/LanguageContextProvider';
@@ -27,7 +28,9 @@ export default function App() {
         backgroundColor={tintColor}
       />
       <LanguageContextProvider>
-        <MainTabNavigator />
+        <PointsContextProvider>
+          <MainTabNavigator />
+        </PointsContextProvider>
       </LanguageContextProvider>
     </SafeAreaView>
   );

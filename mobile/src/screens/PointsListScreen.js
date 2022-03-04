@@ -1,20 +1,17 @@
 import {View, Text} from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React, {useContext} from 'react';
 import PointsList from '../components/PointsList';
 import {getPoints} from '../api/szopPoints';
 import {HugeText} from '../components/Text';
+import {PointsContext} from '../context/PointsContextProvider';
+import LoadingScreen from './LoadingScreen';
 
 export default function PointsListScreen() {
-  const [points, setPoints] = useState([]);
+  const {points} = useContext(PointsContext);
 
-  useEffect(() => {
-    setPoints(getPoints());
-  }, []);
-
-  return (
-    <>
-      <HugeText>Lista punktów (ilość punktów: {points.length})</HugeText>
-      <PointsList points={points} />
-    </>
+  return points.length == 0 ? (
+    <LoadingScreen />
+  ) : (
+    <PointsList points={points} />
   );
 }
