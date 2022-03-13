@@ -1,12 +1,16 @@
+apply plugin: "com.google.android.libraries.mapsplatform.secrets-gradle-plugin"
+
 apply plugin: "com.android.application"
 
 import com.android.build.OutputFile
+
 
 project.ext.vectoricons = [
     iconFontNames: [ 'MaterialIcons.ttf', 'EvilIcons.ttf' ] // Name of the font files you want to copy
 ]
 
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+
 
 /**
  * The react.gradle file registers a task for each build variant (e.g. bundleDebugJsAndAssets
@@ -221,6 +225,13 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+}
+
+secrets {
+    // Optionally specify a different file name containing your secrets.
+    // The plugin defaults to "local.properties"
+    propertiesFileName = "secrets.properties"
+    defaultPropertiesFileName = "secrets.defaults.properties"
 }
 
 // Run this once to be able to run the application with BUCK
