@@ -1,10 +1,14 @@
 import {View, Text} from 'react-native';
-import React from 'react';
+import React, {useContext} from 'react';
+import {LanguageContext} from '../context/LanguageContextProvider';
+
+export const LoadingScreenName = 'LoadingScreen';
 
 const LoadingScreen = () => {
+  const {text} = useContext(LanguageContext);
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Wczytywanie...</Text>
+      <Text>{text.loading}...</Text>
     </View>
   );
 };

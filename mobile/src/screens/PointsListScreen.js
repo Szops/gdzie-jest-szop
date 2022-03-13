@@ -6,6 +6,8 @@ import {HugeText} from '../components/Text';
 import {PointsContext} from '../context/PointsContextProvider';
 import LoadingScreen from './LoadingScreen';
 
+export const PointsListScreenName = 'PointsListScreen';
+
 export default function PointsListScreen() {
   const {points} = useContext(PointsContext);
 

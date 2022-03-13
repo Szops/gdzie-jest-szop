@@ -3,5 +3,6 @@
   "loading": "Wczytywanie",
   "pointsList": "Lista punktów",
   "pointsMap": "Mapa punktów",
-  "language": "Język"
+  "language": "Język",
+  "loadTheMap": "Wczytaj mapę"
 }

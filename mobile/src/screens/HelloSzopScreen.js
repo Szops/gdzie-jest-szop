@@ -3,6 +3,8 @@ import React, {useContext} from 'react';
 import {HugeText, NormalText} from '../components/Text';
 import {LanguageContext} from '../context/LanguageContextProvider';
 
+export const helloSzopScreenName = 'HelloSzopScreen';
+
 export default function HelloSzopScreen() {
   const {text, selectedLanguage, setSelectedLanguage} =
     useContext(LanguageContext);
