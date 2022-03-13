@@ -10,3 +10,9 @@ export const CardWrapper = styled.View`
   background-color: white;
   elevation: 8;
 `;
+
+export const ScreenWrapper = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;

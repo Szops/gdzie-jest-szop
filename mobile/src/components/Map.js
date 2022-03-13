@@ -4,22 +4,17 @@ import styled from 'styled-components';
 import SzopMarker from './SzopMarker';
 
 const StyledMapView = styled(MapView)`
-  flex: 1;
+  width: 100%;
+  height: 100%;
 `;
 
-const Map = ({points}) => {
-  const initialRegion = {
-    latitude: 51.11108,
-    longitude: 17.033686,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
-  };
-
-  const renderMarkers = () => points.map(point => <SzopMarker point={point} />);
+const Map = ({points, initialRegion}) => {
+  const renderMarkers = () =>
+    points.map(point => <SzopMarker point={point} key={point.point_id} />);
 
   return (
     <StyledMapView initialRegion={initialRegion}>
-      {renderMarkers()}
+      {points && renderMarkers()}
     </StyledMapView>
   );
 };
