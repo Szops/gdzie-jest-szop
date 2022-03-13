@@ -1,21 +1,21 @@
-import {View, Text} from 'react-native';
 import React from 'react';
-
 import MapView from 'react-native-maps';
+import styled from 'styled-components';
+import SzopMarker from './SzopMarker';
 
-const Map = () => {
+const StyledMapView = styled(MapView)`
+  width: 100%;
+  height: 100%;
+`;
+
+const Map = ({points, initialRegion}) => {
+  const renderMarkers = () =>
+    points.map(point => <SzopMarker point={point} key={point.point_id} />);
+
   return (
-    <MapView
-      style={{
-        flex: 1,
-      }}
-      initialRegion={{
-        latitude: 51.11108,
-        longitude: 17.033686,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
-      }}
-    />
+    <StyledMapView initialRegion={initialRegion}>
+      {points && renderMarkers()}
+    </StyledMapView>
   );
 };
 
