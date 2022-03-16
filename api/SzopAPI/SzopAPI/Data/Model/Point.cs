@@ -7,10 +7,7 @@ namespace SzopAPI.Data.Model
         public int Number { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
-        public TimeSpan OpeningHour { get; set; }
-        public TimeSpan ClosingHour { get; set; }
-        public DateTime Date { get; set; }
-
+        public List<TimeSpan> OpeningDateTimes { get; set; }
 
     }
 }

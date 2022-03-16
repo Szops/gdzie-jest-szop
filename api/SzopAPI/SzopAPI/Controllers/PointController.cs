@@ -6,7 +6,7 @@ using SzopAPI.Data.Model;
 
 namespace SzopAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/point")]
     [ApiController]
     public class PointController : ControllerBase
     {
