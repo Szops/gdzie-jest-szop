@@ -2,20 +2,27 @@ using Microsoft.AspNetCore.Mvc;
 using SzopAPI.Data;
 using SzopAPI.Data.Interface;
 using SzopAPI.Data.Model;
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace SzopAPI.Controllers
 {
-    [Route("api/point")]
+    [Route("api/open-soon-point")]
     [ApiController]
-    public class PointController : ControllerBase
+    public class OpenSoonPointController : ControllerBase
     {
         private IPoints points = new PointsRepository();
 
         // GET: api/<PointController>
         [HttpGet]
-        public ActionResult<IEnumerable<Point>> GetAllPoints()
+        public ActionResult<IEnumerable<Point>> GetAllOpenPoints()
         {
+
+            foreach (Point point in points.GetAllPoints())
+            {
+                if (TimeHelper.IsPointOpenSoon(point.OpeningDateTimes, 48))
+                {
+                    point.OpenSoon = true;
+                }
+            }
             return points.GetAllPoints();
         }
 
@@ -28,13 +35,19 @@ namespace SzopAPI.Controllers
             {
                 return NotFound();
             }
+
+            if (TimeHelper.IsPointOpenSoon(point.OpeningDateTimes, 48))
+            {
+                point.OpenSoon = true;
+            }
+
             return point;
         }
 
 
         // POST api/<PointController>
         [HttpPost]
-        public ActionResult<IEnumerable<Point>> GetNearestPoints(double latitude, double longitude, double maxDistance)
+        public ActionResult<IEnumerable<Point>> GetNearestPoints(double latitude, double longitude, double maxDistance, int numberOfHours)
         {
             if (maxDistance > 0)
             {
@@ -46,16 +59,19 @@ namespace SzopAPI.Controllers
                     if (DistanceHelper.DistanceTo(latitude, longitude, point.Latitude, point.Longitude) <= maxDistance)
                     {
                         nearestPoints.Add(point);
+
                     }
                 }
 
-                if (nearestPoints.Count == 0)
+                foreach (Point point in nearestPoints)
                 {
-                    return NotFound();
+                    if (TimeHelper.IsPointOpenSoon(point.OpeningDateTimes, numberOfHours))
+                    {
+                        point.OpenSoon = true;
+                    }
                 }
 
                 return nearestPoints;
-
             }
             else
             {
@@ -63,18 +79,5 @@ namespace SzopAPI.Controllers
             }
         }
 
-        /*
-        // PUT api/<PointController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<PointController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
-        */
     }
 }
