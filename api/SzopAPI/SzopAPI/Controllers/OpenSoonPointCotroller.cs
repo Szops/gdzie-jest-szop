@@ -15,6 +15,7 @@ namespace SzopAPI.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Point>> GetAllOpenPoints()
         {
+            List<Point> returnPoints = new List<Point>();
 
             foreach (Point point in points.GetAllPoints())
             {
@@ -22,6 +23,8 @@ namespace SzopAPI.Controllers
                 {
                     point.OpenSoon = true;
                 }
+
+                point.OpeningDateTimes = TimeHelper.CutDatesToEarliest(point.OpeningDateTimes, 5);
             }
             return points.GetAllPoints();
         }
@@ -40,7 +43,7 @@ namespace SzopAPI.Controllers
             {
                 point.OpenSoon = true;
             }
-
+            point.OpeningDateTimes = TimeHelper.CutDatesToEarliest(point.OpeningDateTimes, 5);
             return point;
         }
 
@@ -63,8 +66,10 @@ namespace SzopAPI.Controllers
                     }
                 }
 
+
                 foreach (Point point in nearestPoints)
                 {
+                    point.OpeningDateTimes = TimeHelper.CutDatesToEarliest(point.OpeningDateTimes, 5);
                     if (TimeHelper.IsPointOpenSoon(point.OpeningDateTimes, numberOfHours))
                     {
                         point.OpenSoon = true;

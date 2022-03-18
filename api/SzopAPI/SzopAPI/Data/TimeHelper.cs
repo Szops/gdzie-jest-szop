@@ -37,7 +37,7 @@ namespace SzopAPI.Data
             {
                 TimeSpan diff = date - DateTime.Today;
                 double hours = diff.TotalHours;
-                if (hours > 0 && date > DateTime.Today && hours < numberOfHours)
+                if (hours > 0 && date.Date > DateTime.Today.Date && hours < numberOfHours)
                 {
                     isOpenSoon = true;
                     break;
@@ -45,6 +45,25 @@ namespace SzopAPI.Data
             }
 
             return isOpenSoon;
+        }
+
+        public static List<DateTime> CutDatesToEarliest(List<DateTime> listOfDates, int numberOfDates)
+        {
+            List<DateTime> returnDatesList = new List<DateTime>();
+
+            int i = 0;
+            foreach (DateTime date in listOfDates)
+            {
+                if (i >= numberOfDates) break;
+
+                if (date.Date > DateTime.Today.Date)
+                {
+                    returnDatesList.Add(date);
+                    i++;
+                }
+            }
+
+            return returnDatesList;
         }
     }
 }

@@ -22,6 +22,7 @@ namespace SzopAPI.Controllers
                 {
                     point.OpenSoon = true;
                 }
+                point.OpeningDateTimes = TimeHelper.CutDatesToEarliest(point.OpeningDateTimes, 5);
             }
             return points.GetAllPoints();
         }
@@ -40,7 +41,7 @@ namespace SzopAPI.Controllers
             {
                 point.OpenSoon = true;
             }
-
+            point.OpeningDateTimes = TimeHelper.CutDatesToEarliest(point.OpeningDateTimes, 5);
             return point;
         }
 
@@ -65,6 +66,7 @@ namespace SzopAPI.Controllers
 
                 foreach (Point point in nearestPoints)
                 {
+                    point.OpeningDateTimes = TimeHelper.CutDatesToEarliest(point.OpeningDateTimes, 5);
                     if (TimeHelper.IsPointOpenToday(point.OpeningDateTimes))
                     {
                         point.OpenSoon = true;
