@@ -25,13 +25,15 @@ export default function HelloSzopScreen() {
         </View>
       </TouchableOpacity>
 
-      <NormalText>
+      {/*<NormalText>
         Test powiadomienia
       </NormalText>  
       <TouchableOpacity
         onPress={() =>{
-          PushNotification.localNotification({
+          PushNotification.localNotificationSchedule({
             channelId: "szop-nt",
+            date: new Date(Date.now() + 10 * 1000),
+            allowWhileIdle: true,
             title: "Test", // (optional)
             message: "Powiadomienie testowe", // (required)
         });}
@@ -40,6 +42,7 @@ export default function HelloSzopScreen() {
           <NormalText color="white"> TEST </NormalText>
         </View>
       </TouchableOpacity>
+      */}
     </>
   );
 }
