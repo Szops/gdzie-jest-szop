@@ -16,28 +16,33 @@ export const HugeText = styled.Text`
   font-size: 24px;
 `;
 
-// Home screen 
+// Home screen
 
 export const Title = styled.Text`
-    font-size: ${props => props.upper? '20px' : '35px'};
-    color: white;
-    font-weight: 700;
-    bottom: ${props => props.upper? '35%' : '10%'};
-    letter-spacing: 2px;
+  font-size: ${props => (props.upper ? '20px' : '35px')};
+  color: white;
+  left: 5%;
+  font-weight: 700;
+  letter-spacing: 2px;
 `;
 
 export const TileHeader = styled.Text`
-    font-size: 35px;
-    color: white;
-    font-weight: 700;
-    top: 10%;
-    right: 10%;
+  font-size: 35px;
+  color: white;
+  font-weight: 700;
+  top: 10%;
+  right: 10%;
+  position: absolute;
+  top: 10%;
 `;
 
 export const TileText = styled.Text`
-    font-size: 20px;
-    color: white;
-    line-height: 30px;
-    font-weight: 300;
+  font-size: 20px;
+  color: white;
+  line-height: 30px;
+  font-weight: 300;
+  position: absolute;
+  top: 55%;
+  width: 80%;
+  left: 10%;
 `;
-
