@@ -13,6 +13,6 @@ export const CardWrapper = styled.View`
 
 export const ScreenWrapper = styled.View`
   flex: 1;
-  justify-content: center;
+  justify-content: ${props => props.home? 'flex-start' : 'center'};
   align-items: center;
 `;

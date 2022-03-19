@@ -15,6 +15,7 @@ export default function PointsListScreen() {
   return points === null ? (
     <LoadingScreen />
   ) : (
+    
     <ScreenWrapper>
       <PointsList points={points} />
     </ScreenWrapper>
