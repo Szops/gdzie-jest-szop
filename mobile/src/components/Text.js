@@ -12,8 +12,8 @@ export const SmallText = styled.Text`
 `;
 
 export const HugeText = styled.Text`
-  color: ${textDarkColor};
-  font-size: 24px;
+  color: white;
+  font-size: 20px;
 `;
 
 // Home screen
