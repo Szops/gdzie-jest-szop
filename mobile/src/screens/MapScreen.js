@@ -27,7 +27,9 @@ const MapScreen = () => {
       ) : (
         <Button
           title={text.loadTheMap}
-          onPress={() => setShouldLoadMap(true)}
+          onPress={() => {
+            setShouldLoadMap(true);
+          }}
         />
       )}
     </ScreenWrapper>
