@@ -13,7 +13,6 @@ export default function PointCard({address, description, dates, item}) {
       <Switch
         trackColor={{false: '#767577', true: tintColor}}
         thumbColor={'#f4f3f4'}
-        ios_backgroundColor="#3e3e3e"
         onValueChange={toggleSwitch}
         value={isEnabled}
       />
