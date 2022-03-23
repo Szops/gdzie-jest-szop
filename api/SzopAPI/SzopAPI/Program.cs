@@ -9,6 +9,8 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
