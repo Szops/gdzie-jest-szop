@@ -3,7 +3,7 @@ import React, {useContext} from 'react';
 import {HugeText, NormalText} from '../components/Text';
 import {LanguageContext} from '../context/LanguageContextProvider';
 import {ScreenWrapper} from '../components/Wrapper';
-import PushNotification from "react-native-push-notification";
+import PushNotification from 'react-native-push-notification';
 
 export const helloSzopScreenName = 'HelloSzopScreen';
 
