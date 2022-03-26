@@ -14,7 +14,5 @@ namespace SzopAPI.Data.Model
         public string Description { get; set; }
         public bool OpenSoon { get; set; } = false;
 
-
-
     }
 }

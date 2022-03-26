@@ -15,18 +15,14 @@ namespace SzopAPI.Controllers
 
         // POST api/<PointController>
         [HttpPost]
-        public ActionResult<List<Point>> GetPoints(string url)
+        public ActionResult<string> GetPoints(string url)
         {
-            LoadPoints.DownloadFile(url);
-
-            string fileName = url;
-            int lastIndex = fileName.LastIndexOf('/');
-            int length = fileName.Length - lastIndex;
-
-            fileName = fileName.Substring(fileName.Length - length);
-
-            List<Point> points = LoadPoints.LoadPointFromXLSX(fileName);
-            return points;
+            bool success = LoadPoints.DownloadFile(url);
+            if (success)
+            {
+                return "OK";
+            }
+            else return "KO";
         }
 
 

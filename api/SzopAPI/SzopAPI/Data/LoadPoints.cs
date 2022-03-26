@@ -1,6 +1,7 @@
 using System.Net;
 using SzopAPI.Data.Model;
 using ExcelDataReader;
+using System.Text.RegularExpressions;
 
 namespace SzopAPI.Data
 {
@@ -49,7 +50,7 @@ namespace SzopAPI.Data
                     {
                         while (reader.Read())
                         {
-                            if (i > 0)
+                            if (i > 0 && reader.GetValue(0) != null)
                             {
                                 Point point = new Point();
 
@@ -57,11 +58,21 @@ namespace SzopAPI.Data
                                 point.Street = reader.GetString(1);
                                 point.Sector = reader.GetString(2);
                                 point.Estate = reader.GetString(3);
-                                //jeszcze daty
+                                //daty
+                                point.OpeningDateTimes = new List<DateTime>();
+                                string allDates = reader.GetString(4);
+                                string pattern = @"\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])\ (0[0-9]|1[0-9]|2[0-4])\:([0-5][0-9])";
+                                Regex re = new Regex(pattern);
+
+                                foreach (Match match in re.Matches(allDates))
+                                {
+                                    DateTime date = DateTime.Parse(match.Value);
+                                    point.OpeningDateTimes.Add(date);
+                                }
+                                //
                                 point.Latitude = Convert.ToDouble(reader.GetString(5).Replace('.', ','));
                                 point.Longitude = Convert.ToDouble(reader.GetString(6).Replace('.', ','));
                                 point.Description = reader.GetString(7);
-                                //System.Diagnostics.Debug.WriteLine(point.Street + i.ToString());
                                 points.Add(point);
 
                             }
