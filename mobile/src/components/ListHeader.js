@@ -1,13 +1,11 @@
 import styled from 'styled-components';
-import React from 'react';
-import {View} from 'react-native';
-import {StyleSheet} from 'react-native';
+import React, {useContext} from 'react';
 import {Title} from '../components/Text';
-import {TextInput} from 'react-native-gesture-handler';
+import {LanguageContext} from '../context/LanguageContextProvider';
 import {temporaryNavColor} from '../constants/colors';
 
 const StyledHeader = styled.View`
-  height: 170px;
+  padding-top: 10px;
   width: 100%;
   justify-content: space-around;
 `;
@@ -18,6 +16,8 @@ const StyledLine = styled.View`
   left: 5%;
 `;
 const StyledInput = styled.TextInput`
+  margin-top: 20px;
+  margin-bottom: 20px;
   font-size: 20px;
   margin-left: 5%;
   width: 90%;
@@ -27,13 +27,15 @@ const StyledInput = styled.TextInput`
 `;
 
 export const ListHeader = ({searchPhrase, setSearchPhrase}) => {
+  const {text} = useContext(LanguageContext);
   return (
     <StyledHeader>
-      <Title>All points</Title>
+      <Title>{text.pointsTitle}</Title>
       <StyledInput
         placeholder="Search"
         value={searchPhrase}
         onChangeText={setSearchPhrase}
+        placeholderTextColor="white"
       />
       <StyledLine />
     </StyledHeader>

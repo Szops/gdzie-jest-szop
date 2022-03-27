@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import {textDarkColor, tintColor} from '../constants/colors';
 
 export const CardWrapper = styled.View`
   padding: 10px 0 10px 0;

@@ -1,9 +1,9 @@
 import {View, Text, FlatList} from 'react-native';
 import React from 'react';
-import PointCard from './PointCard';
+import PointListItem from './PointListItem';
 
 export default function PointsList({points, searchPhrase}) {
-  const renderItem = item => <PointCard address={item.title} />;
+  const renderItem = item => <PointListItem address={item.title} />;
   return (
     <FlatList
       data={points.filter(p =>

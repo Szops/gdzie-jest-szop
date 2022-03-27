@@ -11,12 +11,10 @@ import {ListHeader} from '../components/ListHeader';
 
 export const PointsListScreenName = 'PointsListScreen';
 
-const styles = StyleSheet.create({
-  image: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-});
+const StyledImageBackground = styled.ImageBackground`
+  flex: 1;
+  justify-content: center;
+`;
 
 const ListImageWrapper = styled.View`
   background-image: url(image);
@@ -31,17 +29,17 @@ export default function PointsListScreen() {
   return points === null ? (
     <LoadingScreen />
   ) : (
-    <>
+    <ScreenWrapper list>
       <ListImageWrapper>
-        <ImageBackground
+        <StyledImageBackground
           source={image}
-          resizeMode="cover"
-          style={styles.image}></ImageBackground>
+          resizeMode="cover"></StyledImageBackground>
       </ListImageWrapper>
-      <ListHeader {...searchPhrase} setSearchPhrase={setSearchPhrase} />
-      <ScreenWrapper list>
-        <PointsList points={points} searchPhrase={searchPhrase} />
-      </ScreenWrapper>
-    </>
+      <ListHeader
+        searchPhrase={searchPhrase}
+        setSearchPhrase={setSearchPhrase}
+      />
+      <PointsList points={points} searchPhrase={searchPhrase} />
+    </ScreenWrapper>
   );
 }

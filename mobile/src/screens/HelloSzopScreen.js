@@ -1,36 +1,38 @@
-import {StyleSheet} from 'react-native';
+import styled from 'styled-components';
 import React, {useContext} from 'react';
 import {ScrollView} from 'react-native';
 import {LanguageContext} from '../context/LanguageContextProvider';
 import {ScreenWrapper} from '../components/Wrapper';
 import {HomeCard} from '../components/HomeCard';
-
-import {getPixelSizeForLayoutSize} from 'react-native/Libraries/Utilities/PixelRatio';
-
+import {HomeBanner} from '../components/HomeBanner';
 export const helloSzopScreenName = 'HelloSzopScreen';
 
-const styles = StyleSheet.create({
-  scroll: {
-    width: '90%',
-  },
-});
+const StyledScrollView = styled.ScrollView`
+  width: 90%;
+`;
 
 export default function HelloSzopScreen() {
   const {text, selectedLanguage, setSelectedLanguage} =
     useContext(LanguageContext);
   return (
     <ScreenWrapper home>
-      <ScrollView
+      <StyledScrollView
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{flexGrow: 1}}
-        style={styles.scroll}>
-        <HomeCard primary />
+        contentContainerStyle={{flexGrow: 1}}>
+        <HomeBanner textUpper={'GDZIE JEST'} textBottom={'SZOP?'} />
         <HomeCard green />
         <HomeCard />
         <HomeCard />
         <HomeCard last />
-      </ScrollView>
+      </StyledScrollView>
+      {/*<HugeText>{text.appName}</HugeText>
+      <Button
+        title={text.language + ': ' + selectedLanguage}
+        onPress={() =>
+          setSelectedLanguage(selectedLanguage == 'en' ? 'pl' : 'en')
+        }
+      />*/}
     </ScreenWrapper>
   );
 }

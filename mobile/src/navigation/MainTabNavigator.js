@@ -1,21 +1,15 @@
 import React, {useContext} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {
-  DarkTheme,
-  NavigationContainer,
-  DefaultTheme,
-} from '@react-navigation/native';
+import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {textLightColor, tintColor} from '../constants/colors';
+import {tintColor} from '../constants/colors';
 import {navDarkColor, temporaryNavColor} from '../constants/colors';
 import HelloSzopScreen, {helloSzopScreenName} from '../screens/HelloSzopScreen';
-import ReactNativeHelloScreen from '../screens/ReactNativeHelloScreen';
 import PointsListScreen, {
   PointsListScreenName,
 } from '../screens/PointsListScreen';
 import MapScreen, {mapScreenName} from '../screens/MapScreen';
 import {LanguageContext} from '../context/LanguageContextProvider';
-import {NOT_INITIALIZED_ERROR} from '@react-navigation/core/lib/typescript/src/createNavigationContainerRef';
 
 const Tab = createBottomTabNavigator();
 const darkTheme = {
@@ -70,22 +64,12 @@ export default function MainTabNavigator(props) {
           name={PointsListScreenName}
           component={PointsListScreen}
           options={{
-            title: 'XD',
+            title: text.pointsList,
             tabBarIcon: ({color}) => (
               <Icon name="list" color={color} size={26} />
             ),
           }}
         />
-        {/*<Tab.Screen
-          name="ReactNative"
-          component={ReactNativeHelloScreen}
-          options={{
-            title: 'ReactNative',
-            tabBarIcon: ({color}) => (
-              <Icon name="info" color={color} size={26} />
-            ),
-          }}
-        />*/}
       </Tab.Navigator>
     </NavigationContainer>
   );
