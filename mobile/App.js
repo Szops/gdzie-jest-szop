@@ -16,8 +16,28 @@ import PointsContextProvider from './src/context/PointsContextProvider';
 import LanguageContextProvider, {
   LanguageContext,
 } from './src/context/LanguageContextProvider';
+import {useEffect} from 'react';
+import {PermissionsAndroid} from 'react-native';
 
 export default function App() {
+  useEffect(() => {
+    const requestLocationPermission = async () => {
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          console.log('You can use geolocation');
+        } else {
+          console.log('Geolocation permission denied');
+        }
+      } catch (err) {
+        console.warn(err);
+      }
+    };
+    requestLocationPermission();
+  }, []);
+
   return (
     <SafeAreaView style={{flex: 1}}>
       <StatusBar

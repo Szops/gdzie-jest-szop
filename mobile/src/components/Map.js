@@ -13,7 +13,11 @@ const Map = ({points, initialRegion}) => {
     points.map(point => <SzopMarker point={point} key={point.point_id} />);
 
   return (
-    <StyledMapView initialRegion={initialRegion}>
+    <StyledMapView
+      initialRegion={initialRegion}
+      showsUserLocation={true}
+      followsUserLocation={true}
+      showsMyLocationButton={true}>
       {points && renderMarkers()}
     </StyledMapView>
   );
