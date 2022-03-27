@@ -15,7 +15,7 @@ namespace SzopAPI.Data
 
         public PointsRepository()
         {
-            LoadJSONFile("Data/External/allpoints.json");
+            loadAllPointsSheets();
         }
 
         private void LoadJSONFile(string path)
@@ -27,6 +27,19 @@ namespace SzopAPI.Data
             }
         }
 
+        private void loadAllPointsSheets()
+        {
+            string[] files = Directory.GetFiles("Data/External/PointsSheets/", "*.xlsx");
+            foreach (var file in files)
+            {
+                int lastIndex = file.LastIndexOf('/');
+                int length = file.Length - lastIndex;
+                var fileName = file.Substring(file.Length - length);
+
+                List<Point> loadedPoints = LoadPoints.LoadPointFromXLSX(fileName);
+                points.AddRange(loadedPoints);
+            }
+        }
 
         public List<Point> GetAllPoints()
         {
