@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using SzopAPI.Data;
-using SzopAPI.Data.Interface;
-using SzopAPI.Data.Model;
+
 
 namespace SzopAPI.Controllers
 {
@@ -9,12 +8,13 @@ namespace SzopAPI.Controllers
     [ApiController]
     public class DataVersionController : ControllerBase
     {
-       
+
         // GET: api/<PointController>
         [HttpGet]
-        public ActionResult<string> GetAllPoints()
+        public ActionResult<string> GetVersion()
         {
-            return "OK";
+            var version = LoadPoints.GetVersion();
+            return version;
         }
 
     }
