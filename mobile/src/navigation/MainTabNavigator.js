@@ -1,12 +1,10 @@
 import React, {useContext} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
 import {tintColor} from '../constants/colors';
-
+import {navDarkColor, temporaryNavColor} from '../constants/colors';
 import HelloSzopScreen, {helloSzopScreenName} from '../screens/HelloSzopScreen';
-import ReactNativeHelloScreen from '../screens/ReactNativeHelloScreen';
 import PointsListScreen, {
   PointsListScreenName,
 } from '../screens/PointsListScreen';
@@ -14,17 +12,34 @@ import MapScreen, {mapScreenName} from '../screens/MapScreen';
 import {LanguageContext} from '../context/LanguageContextProvider';
 
 const Tab = createBottomTabNavigator();
+const darkTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: navDarkColor,
+  },
+};
 
 export default function MainTabNavigator(props) {
   const {text} = useContext(LanguageContext);
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={darkTheme}>
       <Tab.Navigator
         screenOptions={{
           tabBarActiveTintColor: tintColor,
+          backgroundColor: navDarkColor,
+          tabBarShowLabel: false,
+          tabBarHideOnKeyboard: true,
+          tabBarStyle: {
+            borderTopLeftRadius: 20,
+            borderTopRightRadius: 20,
+            height: 90,
+            backgroundColor: temporaryNavColor,
+            borderTopColor: temporaryNavColor,
+            elevation: 3,
+          },
           headerShown: false,
-        }}
-        tabBarHideOnKeyboard={true}>
+        }}>
         <Tab.Screen
           name={helloSzopScreenName}
           component={HelloSzopScreen}
@@ -52,16 +67,6 @@ export default function MainTabNavigator(props) {
             title: text.pointsList,
             tabBarIcon: ({color}) => (
               <Icon name="list" color={color} size={26} />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="ReactNative"
-          component={ReactNativeHelloScreen}
-          options={{
-            title: 'ReactNative',
-            tabBarIcon: ({color}) => (
-              <Icon name="info" color={color} size={26} />
             ),
           }}
         />

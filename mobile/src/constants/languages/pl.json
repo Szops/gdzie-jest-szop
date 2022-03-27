@@ -4,5 +4,9 @@
   "pointsList": "Lista punktów",
   "pointsMap": "Mapa punktów",
   "language": "Język",
-  "loadTheMap": "Wczytaj mapę"
+  "loadTheMap": "Wczytaj mapę",
+  "pointsTitle": "Wszystkie punkty",
+  "tileHeader": "O\nPROJEKCIE",
+  "tileText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut laboreet dolore magna aliqua."
+  
 }
