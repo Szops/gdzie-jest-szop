@@ -17,7 +17,7 @@ import LanguageContextProvider, {
   LanguageContext,
 } from './src/context/LanguageContextProvider';
 import {useEffect} from 'react';
-import {PermissionsAndroid} from 'react-native';
+import {PermissionsAndroid, Alert} from 'react-native';
 
 export default function App() {
   useEffect(() => {
@@ -26,10 +26,11 @@ export default function App() {
         const granted = await PermissionsAndroid.request(
           PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
         );
-        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-          console.log('You can use geolocation');
-        } else {
-          console.log('Geolocation permission denied');
+        if (granted === PermissionsAndroid.RESULTS.DENIED) {
+          Alert.alert(
+            'Uwaga',
+            'Brak dostępu do lokalizacji. Twoja pozycja nie będzie wyświetlana na mapie.',
+          );
         }
       } catch (err) {
         console.warn(err);
