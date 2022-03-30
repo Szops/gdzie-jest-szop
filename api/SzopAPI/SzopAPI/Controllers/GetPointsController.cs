@@ -2,10 +2,14 @@ using Microsoft.AspNetCore.Mvc;
 using SzopAPI.Data;
 using SzopAPI.Data.Interface;
 using SzopAPI.Data.Model;
+using SzopAPI.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace SzopAPI.Controllers
 {
+
     [Route("api/get-points")]
+    [ApiKey]
     [ApiController]
     public class GetPointsController : ControllerBase
     {
