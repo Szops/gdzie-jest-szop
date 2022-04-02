@@ -12,7 +12,7 @@ const languageObject = {
 };
 
 const LanguageContextProvider = ({children}) => {
-  const [selectedLanguage, setSelectedLanguage] = useState('pl');
+  const [selectedLanguage, setSelectedLanguage] = useState('en');
 
   const text = {...languageObject[selectedLanguage]};
   return (
