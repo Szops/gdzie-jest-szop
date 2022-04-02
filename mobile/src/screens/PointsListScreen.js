@@ -1,9 +1,7 @@
-import {View, Text} from 'react-native';
 import styled from 'styled-components';
-import React, {useContext, useState, useEffect} from 'react';
+import React, {useContext, useState} from 'react';
 import PointsList from '../components/PointsList';
 import image from '../images/listImage.jpg';
-import {ImageBackground, StyleSheet} from 'react-native';
 import {PointsContext} from '../context/PointsContextProvider';
 import LoadingScreen from './LoadingScreen';
 import {ScreenWrapper} from '../components/Wrapper';

@@ -1,4 +1,3 @@
-import {} from 'react-native';
 import React, {useState, useEffect, createContext} from 'react';
 import {getPoints} from '../api/szopPoints';
 

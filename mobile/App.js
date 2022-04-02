@@ -9,13 +9,9 @@
 import React from 'react';
 import {SafeAreaView, StatusBar} from 'react-native';
 import MainTabNavigator from './src/navigation/MainTabNavigator';
-import HelloSzopScreen from './src/screens/HelloSzopScreen';
-import ReactNativeHelloScreen from './src/screens/ReactNativeHelloScreen';
 import {tintColor, navDarkColor} from './src/constants/colors';
 import PointsContextProvider from './src/context/PointsContextProvider';
-import LanguageContextProvider, {
-  LanguageContext,
-} from './src/context/LanguageContextProvider';
+import LanguageContextProvider from './src/context/LanguageContextProvider';
 import {useEffect} from 'react';
 import {PermissionsAndroid} from 'react-native';
 
@@ -39,7 +35,7 @@ export default function App() {
   }, []);
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor:navDarkColor}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: navDarkColor}}>
       <StatusBar
         barStyle={'light-content'}
         hidden={false}

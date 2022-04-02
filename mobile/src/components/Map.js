@@ -10,7 +10,7 @@ const StyledMapView = styled(MapView)`
 
 const Map = ({points, initialRegion}) => {
   const renderMarkers = () =>
-    points.map(point => <SzopMarker point={point} key={point.point_id} />);
+    points.map(point => <SzopMarker point={point} key={point.pointId} />);
 
   return (
     <StyledMapView

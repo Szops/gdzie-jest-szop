@@ -2,8 +2,7 @@ import React, {useContext} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {tintColor} from '../constants/colors';
-import {navDarkColor, temporaryNavColor} from '../constants/colors';
+import {tintColor, navDarkColor, temporaryNavColor} from '../constants/colors';
 import HelloSzopScreen, {helloSzopScreenName} from '../screens/HelloSzopScreen';
 import PointsListScreen, {
   PointsListScreenName,

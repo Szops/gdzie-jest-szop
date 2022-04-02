@@ -1,5 +1,4 @@
-import {View, Text} from 'react-native';
-import React, {createContext, useContext, useState} from 'react';
+import React, {createContext, useState} from 'react';
 
 import * as en from '../constants/languages/en.json';
 import * as pl from '../constants/languages/pl.json';

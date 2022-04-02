@@ -1,5 +1,5 @@
-import {View, Text, Switch, StyleSheet} from 'react-native';
-import {HugeText, NormalText, SmallText} from './Text';
+import {Switch} from 'react-native';
+import {HugeText} from './Text';
 import {CardWrapper} from './Wrapper';
 import React, {useState} from 'react';
 import {tintColor, switchFalse, thumbColor} from '../constants/colors';
