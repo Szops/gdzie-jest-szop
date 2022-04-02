@@ -5,12 +5,11 @@ import {tintColor} from '../constants/colors';
 const SzopMarker = ({point}) => {
   return (
     <Marker
-      key={point.point_id}
-      title={point.title}
-      description={point.desc}
+      title={point.street}
+      description={point.description}
       coordinate={{
-        latitude: Number.parseFloat(point.lat),
-        longitude: Number.parseFloat(point.lng),
+        latitude: point.latitude,
+        longitude: point.longitude,
       }}
       pinColor={tintColor}
     />

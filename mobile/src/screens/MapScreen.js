@@ -1,4 +1,4 @@
-import {View, Text, Button} from 'react-native';
+import {Button} from 'react-native';
 import React, {useContext, useState} from 'react';
 import {LanguageContext} from '../context/LanguageContextProvider';
 import {PointsContext} from '../context/PointsContextProvider';

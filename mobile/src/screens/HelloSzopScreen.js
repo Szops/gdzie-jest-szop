@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import React, {useContext} from 'react';
-import {ScrollView} from 'react-native';
 import {LanguageContext} from '../context/LanguageContextProvider';
 import {ScreenWrapper} from '../components/Wrapper';
 import {HomeCard} from '../components/HomeCard';
