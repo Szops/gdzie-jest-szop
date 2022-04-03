@@ -14,11 +14,11 @@ namespace SzopAPI.Data
         /// </summary>
         /// <param name="url">URL to file</param>
         /// <returns>true if download was successful, false if wasn't</returns>
-        public static bool DownloadFile(string url)
+        public static string DownloadFile(string url)
         {
             //download file from given url
             string fileName = url;
-            bool success = false;
+            string returnMessage = "";
             using (var webClient = new WebClient())
             {
                 try
@@ -33,7 +33,8 @@ namespace SzopAPI.Data
                 }
                 catch (Exception e)
                 {
-                    return success;
+                    System.Diagnostics.Debug.WriteLine("Failed to download file: {0}", e);
+                    return "Exception caught! Failed to download file.";
                 }
             }
 
@@ -53,74 +54,75 @@ namespace SzopAPI.Data
                     bool same = CompareFiles(file, "Data/External/Temp/" + fileName);
                     if (same)
                     {
-                        System.Diagnostics.Debug.WriteLine("They are the same! Deleting downloaded file!");
                         DeleteFile("Data/External/Temp/" + fileName);
-                        success = true;
-                        return success;
+                        return "The same file already exists. No difference detected. No changes have been made";
                     }
                     else //if they are not the same replace old file with the downloaded one
                     {
-                        System.Diagnostics.Debug.WriteLine("They are not the same. Updating files...");
                         DeleteFile(file);
                         File.Move("Data/External/Temp/" + fileName, file);
                         UpdateVersion();
-                        success = true;
-                        return success;
+                        return "Although The same file already exists it is not the same. Updated xlsx file.";
                     }
                 }
             }
-            System.Diagnostics.Debug.WriteLine("New file detected. Moving to main folder...");
+
             //if the file doesnt exist in PointsSheets directory: move downloaded file to PointsSheets directory
             File.Move("Data/External/Temp/" + fileName, "Data/External/PointsSheets/" + fileName);
             UpdateVersion();
 
-            success = true;
-            return success;
+            return "No file with the same name detected. Downloaded file has been moved to PointsSheets";
         }
 
         public static List<Point> LoadPointFromXLSX(string fileName)
         {
             List<Point> points = new List<Point>();
-
-            using (var stream = File.Open("Data/External/PointsSheets/" + fileName, FileMode.Open, FileAccess.Read))
+            try
             {
-                using (var reader = ExcelReaderFactory.CreateReader(stream))
+                using (var stream = File.Open("Data/External/PointsSheets/" + fileName, FileMode.Open, FileAccess.Read))
                 {
-                    int i = 0;
-                    do
+                    using (var reader = ExcelReaderFactory.CreateReader(stream))
                     {
-                        while (reader.Read())
+                        int i = 0;
+                        do
                         {
-                            if (i > 0 && reader.GetValue(0) != null)
+                            while (reader.Read())
                             {
-                                Point point = new Point();
-
-                                point.PointId = Convert.ToInt32(reader.GetDouble(0));
-                                point.Street = reader.GetString(1);
-                                point.Sector = reader.GetString(2);
-                                point.Estate = reader.GetString(3);
-                                //daty
-                                point.OpeningDateTimes = new List<DateTime>();
-                                string allDates = reader.GetString(4);
-                                string pattern = @"\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])\ (0[0-9]|1[0-9]|2[0-4])\:([0-5][0-9])";
-                                Regex re = new Regex(pattern);
-
-                                foreach (Match match in re.Matches(allDates))
+                                if (i > 0 && reader.GetValue(0) != null)
                                 {
-                                    DateTime date = DateTime.Parse(match.Value);
-                                    point.OpeningDateTimes.Add(date);
-                                }
-                                //
-                                point.Latitude = Convert.ToDouble(reader.GetString(5).Replace('.', ','));
-                                point.Longitude = Convert.ToDouble(reader.GetString(6).Replace('.', ','));
-                                point.Description = reader.GetString(7);
-                                points.Add(point);
+                                    Point point = new Point();
 
+                                    point.PointId = Convert.ToInt32(reader.GetDouble(0));
+                                    point.Street = reader.GetString(1);
+                                    point.Sector = reader.GetString(2);
+                                    point.Estate = reader.GetString(3);
+                                    //daty
+                                    point.OpeningDateTimes = new List<DateTime>();
+                                    string allDates = reader.GetString(4);
+                                    string pattern = @"\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])\ (0[0-9]|1[0-9]|2[0-4])\:([0-5][0-9])";
+                                    Regex re = new Regex(pattern);
+
+                                    foreach (Match match in re.Matches(allDates))
+                                    {
+                                        DateTime date = DateTime.Parse(match.Value);
+                                        point.OpeningDateTimes.Add(date);
+                                    }
+                                    //
+                                    point.Latitude = Convert.ToDouble(reader.GetString(5).Replace('.', ','));
+                                    point.Longitude = Convert.ToDouble(reader.GetString(6).Replace('.', ','));
+                                    point.Description = reader.GetString(7);
+                                    points.Add(point);
+
+                                }
+                                i++;
                             }
-                            i++;
-                        }
-                    } while (reader.NextResult());
+                        } while (reader.NextResult());
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("Failed to load points from the XLSX file: {0}", e);
             }
 
             return points;
@@ -188,8 +190,9 @@ namespace SzopAPI.Data
                 {
                     File.Delete(filePath);
                 }
-                catch (Exception ex)
+                catch (Exception e)
                 {
+                    System.Diagnostics.Debug.WriteLine("Failed to delete file: {0}", e);
                 }
             }
         }
