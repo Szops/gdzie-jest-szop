@@ -1,4 +1,4 @@
-import {View, Text} from 'react-native';
+import {Text} from 'react-native';
 import React, {useContext} from 'react';
 import {LanguageContext} from '../context/LanguageContextProvider';
 import {ScreenWrapper} from '../components/Wrapper';

@@ -1,5 +1,4 @@
-import {View, Text} from 'react-native';
-import React, {createContext, useContext, useState} from 'react';
+import React, {createContext, useState} from 'react';
 
 import * as en from '../constants/languages/en.json';
 import * as pl from '../constants/languages/pl.json';
@@ -12,7 +11,7 @@ const languageObject = {
 };
 
 const LanguageContextProvider = ({children}) => {
-  const [selectedLanguage, setSelectedLanguage] = useState('pl');
+  const [selectedLanguage, setSelectedLanguage] = useState('en');
 
   const text = {...languageObject[selectedLanguage]};
   return (

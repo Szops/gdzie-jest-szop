@@ -9,13 +9,11 @@
 import React from 'react';
 import {SafeAreaView, StatusBar} from 'react-native';
 import MainTabNavigator from './src/navigation/MainTabNavigator';
-import HelloSzopScreen from './src/screens/HelloSzopScreen';
-import ReactNativeHelloScreen from './src/screens/ReactNativeHelloScreen';
-import {tintColor} from './src/constants/colors';
+import {tintColor, navDarkColor} from './src/constants/colors';
 import PointsContextProvider from './src/context/PointsContextProvider';
-import LanguageContextProvider, {
-  LanguageContext,
-} from './src/context/LanguageContextProvider';
+import LanguageContextProvider from './src/context/LanguageContextProvider';
+import {useEffect} from 'react';
+import {PermissionsAndroid, Alert} from 'react-native';
 import {useEffect} from 'react';
 import {PermissionsAndroid} from 'react-native';
 
@@ -26,10 +24,11 @@ export default function App() {
         const granted = await PermissionsAndroid.request(
           PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
         );
-        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-          console.log('You can use geolocation');
-        } else {
-          console.log('Geolocation permission denied');
+        if (granted === PermissionsAndroid.RESULTS.DENIED) {
+          Alert.alert(
+            'Uwaga',
+            'Brak dostępu do lokalizacji. Twoja pozycja nie będzie wyświetlana na mapie.',
+          );
         }
       } catch (err) {
         console.warn(err);
@@ -39,7 +38,7 @@ export default function App() {
   }, []);
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: navDarkColor}}>
       <StatusBar
         barStyle={'light-content'}
         hidden={false}
