@@ -19,14 +19,11 @@ namespace SzopAPI.Controllers
 
         // POST api/<PointController>
         [HttpPost]
-        public ActionResult<string> GetPoints(string url)
+        public ActionResult<string> GetPoints([Required] string url, [FromHeader(Name = "ApiKey")][Required] string apiKey)
         {
-            bool success = LoadPoints.DownloadFile(url);
-            if (success)
-            {
-                return "OK";
-            }
-            else return "KO";
+            string message = LoadPoints.DownloadFile(url);
+
+            return message;
         }
 
 
