@@ -17,5 +17,11 @@ RUN dotnet publish "SzopAPI.csproj" -c Release -o /app/publish /p:UseAppHost=fal
 
 FROM base AS final
 WORKDIR /app
+COPY ["Data/.", "./Data/"]
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "SzopAPI.dll"]
+
+#For local hosting
+#ENTRYPOINT ["dotnet", "SzopAPI.dll"] 
+
+#For Heroku
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet SzopAPI.dll
