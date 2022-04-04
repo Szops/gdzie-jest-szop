@@ -1,11 +1,12 @@
 import styled from 'styled-components';
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import PointsList from '../components/PointsList';
 import image from '../images/listImage.jpg';
-import {PointsContext} from '../context/PointsContextProvider';
 import LoadingScreen from './LoadingScreen';
 import {ScreenWrapper} from '../components/Wrapper';
 import {ListHeader} from '../components/ListHeader';
+import PointsDAO from '../database/PointsDAO';
+import withObservables from '@nozbe/with-observables';
 
 export const PointsListScreenName = 'PointsListScreen';
 
@@ -20,9 +21,8 @@ const ListImageWrapper = styled.View`
   width: 100%;
 `;
 
-export default function PointsListScreen() {
+function PointsListScreen({points}) {
   const [searchPhrase, setSearchPhrase] = useState('');
-  const {points} = useContext(PointsContext);
 
   return points === null ? (
     <LoadingScreen />
@@ -41,3 +41,9 @@ export default function PointsListScreen() {
     </ScreenWrapper>
   );
 }
+
+export default withObservables(['points'], ({points}) => ({
+  points: PointsDAO.getPoints().observeWithColumns([
+    'is_notifications_enabled',
+  ]),
+}))(PointsListScreen);

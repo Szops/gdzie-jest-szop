@@ -4,17 +4,20 @@ import {CardWrapper} from './Wrapper';
 import React, {useState} from 'react';
 import {tintColor, switchFalse, thumbColor} from '../constants/colors';
 
-export default function PointListItem({address, description, dates, item}) {
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+export default function PointListItem({point}) {
+  const toggleSwitch = async () => {
+    return point.isNotificationsEnabled
+      ? await point.turnOffNotifications()
+      : await point.turnOnNotifications();
+  };
   return (
     <CardWrapper>
-      <HugeText>{address}</HugeText>
+      <HugeText>{point.street}</HugeText>
       <Switch
         trackColor={{false: switchFalse, true: tintColor}}
         thumbColor={thumbColor}
         onValueChange={toggleSwitch}
-        value={isEnabled}
+        value={point.isNotificationsEnabled}
       />
     </CardWrapper>
   );

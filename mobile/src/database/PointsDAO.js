@@ -7,7 +7,8 @@ const openingDates = database.collections.get('opening_dates');
 const listNames = {SZOP: 'szop', PSZOK: 'pszok'};
 
 export default {
-  observePointsLists: () => pointsLists.query().observe(),
+  getPointsLists: () => pointsLists.query(),
+  getPoints: () => points.query(),
 
   createSzopPointsList: async ({version, list}) => {
     await database.write(async () => {
@@ -18,12 +19,12 @@ export default {
           return pointsList;
         })
         .then(pointsList => {
-          if (list !== undefined)
-            Promise.all(
-              list.map(async point => {
-                await pointsList.callWriter(() => pointsList.addPoint(point));
-              }),
-            );
+          //   if (list !== undefined)
+          Promise.all(
+            list.map(async point => {
+              await pointsList.callWriter(() => pointsList.addPoint(point));
+            }),
+          );
         });
     });
   },

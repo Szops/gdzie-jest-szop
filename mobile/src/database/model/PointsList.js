@@ -26,28 +26,24 @@ export default class PointsList extends Model {
   );
 
   @writer async addPoint(pointData) {
-    return await this.collections
-      .get('points')
-      .create(point => {
-        point.pointsList.set(this);
-        point.pointId = pointData.pointId;
-        point.street = pointData.street;
-        point.sector = pointData.sector;
-        point.estate = pointData.estate;
-        point.latitude = pointData.latitude;
-        point.longitude = pointData.longitude;
-        point.description = pointData.description;
-        point.isNotificationsEnabled = false;
-        return point;
-      })
-      .then(point => {
-        Promise.all(
-          pointData.openingDateTimes.map(async date => {
-            let b = date.split(/\D+/);
-            --b[1]; // month {0, ... , 11}, not {1, ... , 12}
-            await this.callWriter(() => point.addOpeningDate(Date.UTC(...b)));
-          }),
-        );
-      });
+    return await this.collections.get('points').create(point => {
+      point.pointsList.set(this);
+      point.pointId = pointData.pointId;
+      point.street = pointData.street;
+      point.sector = pointData.sector;
+      point.estate = pointData.estate;
+      point.latitude = pointData.latitude;
+      point.longitude = pointData.longitude;
+      point.description = pointData.description;
+      point.isNotificationsEnabled = false;
+
+      Promise.all(
+        pointData.openingDateTimes.map(async date => {
+          let b = date.split(/\D+/);
+          --b[1]; // month {0, ... , 11}, not {1, ... , 12}
+          await this.callWriter(() => point.addOpeningDate(Date.UTC(...b)));
+        }),
+      );
+    });
   }
 }

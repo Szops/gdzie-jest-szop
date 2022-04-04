@@ -3,7 +3,7 @@ import React from 'react';
 import PointListItem from './PointListItem';
 
 export default function PointsList({points, searchPhrase}) {
-  const renderItem = item => <PointListItem address={item.street} />;
+  const renderItem = item => <PointListItem point={item} />;
   return (
     <FlatList
       data={points.filter(p =>
