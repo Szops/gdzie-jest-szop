@@ -1,10 +1,13 @@
 import styled from 'styled-components';
 import React, {useContext} from 'react';
+import {Button} from 'react-native';
 import {LanguageContext} from '../context/LanguageContextProvider';
 import {ScreenWrapper} from '../components/Wrapper';
 import {HomeCard} from '../components/HomeCard';
 import {HomeBanner} from '../components/HomeBanner';
 import PushNotification from 'react-native-push-notification';
+import {getPoints} from '../api/szopPoints';
+import PointsDAO from '../database/PointsDAO';
 export const helloSzopScreenName = 'HelloSzopScreen';
 
 const StyledScrollView = styled.ScrollView`
@@ -14,6 +17,18 @@ const StyledScrollView = styled.ScrollView`
 export default function HelloSzopScreen() {
   const {text, selectedLanguage, setSelectedLanguage} =
     useContext(LanguageContext);
+
+  const deleteDataabse = async () => await PointsDAO.deleteAllLists();
+
+  const updateDataabse = async () => {
+    await PointsDAO.deleteAllLists();
+    await getPoints()
+      .then(points =>
+        PointsDAO.createSzopPointsList({version: 'unknown', list: points}),
+      )
+      .catch(error => alert(error.message));
+  };
+
   return (
     <ScreenWrapper home>
       <StyledScrollView
@@ -25,6 +40,9 @@ export default function HelloSzopScreen() {
         <HomeCard />
         <HomeCard />
         <HomeCard last />
+        {/* Przyciski tylko do demo, później zrobimy automatyczne pobieranie w useEffect */}
+        <Button title="Pobierz bazę danych" onPress={updateDataabse} />
+        <Button title="Usuń bazę danych" onPress={deleteDataabse} />
       </StyledScrollView>
       {/*<HugeText>{text.appName}</HugeText>
       <Button

@@ -1,17 +1,17 @@
 import {Button} from 'react-native';
 import React, {useContext, useState} from 'react';
 import {LanguageContext} from '../context/LanguageContextProvider';
-import {PointsContext} from '../context/PointsContextProvider';
 import Map from '../components/Map';
 import {ScreenWrapper} from '../components/Wrapper';
+import withObservables from '@nozbe/with-observables';
+import PointsDAO from '../database/PointsDAO';
 
 export const mapScreenName = 'MapScreen';
 
-const MapScreen = () => {
+const MapScreen = ({points}) => {
   const [shouldLoadMap, setShouldLoadMap] = useState(false);
 
   const {text} = useContext(LanguageContext);
-  const {points} = useContext(PointsContext);
 
   const initialRegion = {
     latitude: 51.11108,
@@ -36,4 +36,8 @@ const MapScreen = () => {
   );
 };
 
-export default MapScreen;
+export default withObservables(['points'], ({points}) => ({
+  points: PointsDAO.getPoints().observeWithColumns([
+    'is_notifications_enabled',
+  ]),
+}))(MapScreen);

@@ -28,19 +28,18 @@ export default class Point extends Model {
   @children('opening_dates') openingDates;
 
   @writer async turnOnNotifications() {
-    await this.update(point => {
+    return await this.update(point => {
       point.isNotificationsEnabled = true;
     });
   }
   @writer async turnOffNotifications() {
-    await this.update(point => {
+    return await this.update(point => {
       point.isNotificationsEnabled = false;
     });
   }
   @writer async addOpeningDate(date) {
     return this.collections.get('opening_dates').create(openingDate => {
       openingDate.point.set(this);
-      //openingDate.point = 2.0; //.set(this);
       openingDate.date = date;
     });
   }
