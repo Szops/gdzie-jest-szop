@@ -1,3 +1,5 @@
+//using SzopAPI.Attributes;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -11,7 +13,7 @@ var app = builder.Build();
 
 System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
 
-
+//app.UseMiddleware<ApiKeyAttribute>();
 app.UseSwagger();
 app.UseSwaggerUI();
 
