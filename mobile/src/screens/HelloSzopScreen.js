@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import React, {useContext} from 'react';
-import {Button} from 'react-native';
 import {LanguageContext} from '../context/LanguageContextProvider';
 import {ScreenWrapper} from '../components/Wrapper';
 import {HomeCard} from '../components/HomeCard';
@@ -18,7 +17,7 @@ const StyledScrollView = styled.ScrollView`
 export default function HelloSzopScreen() {
   const [input, setInput] = React.useState();
   const [input2, setInput2] = React.useState();
-  
+
   const {text, selectedLanguage, setSelectedLanguage} =
     useContext(LanguageContext);
 
@@ -32,7 +31,6 @@ export default function HelloSzopScreen() {
       )
       .catch(error => alert(error.message));
   };
-
 
   return (
     <ScreenWrapper home>
