@@ -71,7 +71,7 @@ export default function HelloSzopScreen() {
               new Date(
                 2022,
                 3,
-                4,
+                7,
                 Number(input2) - 2,
                 Number(input),
                 0,
@@ -85,12 +85,16 @@ export default function HelloSzopScreen() {
               date: new Date(
                 2022,
                 3,
-                4,
+                7,
                 Number(input2) - 2,
                 Number(input),
                 0,
                 0,
               ),
+              allowWhileIdle: true,
+              soundName: 'notification_sound.wav',
+              playSound: true,
+              vibrate: true,
             });
           }}
         />
