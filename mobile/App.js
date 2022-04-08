@@ -6,10 +6,17 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, {useContext} from 'react';
 import {SafeAreaView, StatusBar} from 'react-native';
 import MainTabNavigator from './src/navigation/MainTabNavigator';
 import {tintColor, navDarkColor} from './src/constants/colors';
+<<<<<<< Updated upstream
+=======
+import PointsContextProvider from './src/context/PointsContextProvider';
+import MarkerContextProvider, {
+  MarkerContext,
+} from './src/context/MarkerContextProvider';
+>>>>>>> Stashed changes
 import LanguageContextProvider from './src/context/LanguageContextProvider';
 import {useEffect} from 'react';
 import {PermissionsAndroid, Alert} from 'react-native';
@@ -44,7 +51,15 @@ export default function App() {
         backgroundColor={tintColor}
       />
       <LanguageContextProvider>
+<<<<<<< Updated upstream
         <MainTabNavigator />
+=======
+        <PointsContextProvider>
+          <MarkerContextProvider>
+            <MainTabNavigator />
+          </MarkerContextProvider>
+        </PointsContextProvider>
+>>>>>>> Stashed changes
       </LanguageContextProvider>
     </SafeAreaView>
   );

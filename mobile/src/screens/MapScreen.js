@@ -1,7 +1,8 @@
-import {Button} from 'react-native';
+import {Button, View} from 'react-native';
 import React, {useContext, useState} from 'react';
 import {LanguageContext} from '../context/LanguageContextProvider';
 import Map from '../components/Map';
+import MapMarkerCard from '../components/MapMarkerCard';
 import {ScreenWrapper} from '../components/Wrapper';
 import withObservables from '@nozbe/with-observables';
 import PointsDAO from '../database/PointsDAO';
@@ -23,7 +24,10 @@ const MapScreen = ({points}) => {
   return (
     <ScreenWrapper>
       {shouldLoadMap ? (
-        <Map points={points} initialRegion={initialRegion} />
+        <>
+          <Map points={points} initialRegion={initialRegion} />
+          <MapMarkerCard></MapMarkerCard>
+        </>
       ) : (
         <Button
           title={text.loadTheMap}

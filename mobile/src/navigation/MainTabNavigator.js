@@ -7,6 +7,9 @@ import HelloSzopScreen, {helloSzopScreenName} from '../screens/HelloSzopScreen';
 import PointsListScreen, {
   PointsListScreenName,
 } from '../screens/PointsListScreen';
+import MarkerContextProvider, {
+  MarkerContext,
+} from '../context/MarkerContextProvider';
 import MapScreen, {mapScreenName} from '../screens/MapScreen';
 import {LanguageContext} from '../context/LanguageContextProvider';
 
@@ -19,8 +22,10 @@ const darkTheme = {
   },
 };
 
-export default function MainTabNavigator(props) {
+export default function MainTabNavigator() {
   const {text} = useContext(LanguageContext);
+  const {navHidden} = useContext(MarkerContext);
+
   return (
     <NavigationContainer theme={darkTheme}>
       <Tab.Navigator
@@ -33,6 +38,7 @@ export default function MainTabNavigator(props) {
             borderTopLeftRadius: 20,
             borderTopRightRadius: 20,
             height: 90,
+            display: navHidden ? 'none' : 'flex',
             backgroundColor: temporaryNavColor,
             borderTopColor: temporaryNavColor,
             elevation: 3,

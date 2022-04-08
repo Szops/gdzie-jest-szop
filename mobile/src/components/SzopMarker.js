@@ -1,18 +1,23 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Marker} from 'react-native-maps';
+import {MarkerContext} from '../context/MarkerContextProvider';
 import {tintColor} from '../constants/colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {View} from 'react-native';
 
 const SzopMarker = ({point}) => {
+  const {updateMarker, displayMarker} = useContext(MarkerContext);
+  const onPress = () => {
+    displayMarker('true');
+    updateMarker(point);
+  };
   return (
     <Marker
-      title={point.street}
-      description={point.description}
       coordinate={{
         latitude: point.latitude,
         longitude: point.longitude,
       }}
+<<<<<<< Updated upstream
       pinColor={point.isNotificationsEnabled ? 'green' : tintColor}>
       {/* Marker jest testowy, jak tylko zrobimy sensowne grafiki,to je podmienimy i zrobimy z tego ładny komponent */}
       <View style={{position: 'relative'}}>
@@ -32,6 +37,10 @@ const SzopMarker = ({point}) => {
         )}
       </View>
     </Marker>
+=======
+      pinColor={tintColor}
+      onPress={onPress}></Marker>
+>>>>>>> Stashed changes
   );
 };
 
