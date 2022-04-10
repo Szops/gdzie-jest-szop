@@ -2,7 +2,7 @@ using System.Net;
 using SzopAPI.Data.Model;
 using ExcelDataReader;
 using System.Text.RegularExpressions;
-using System;
+using System.Globalization;
 
 
 namespace SzopAPI.Data
@@ -108,8 +108,8 @@ namespace SzopAPI.Data
                                         point.OpeningDateTimes.Add(date);
                                     }
                                     //
-                                    point.Latitude = Convert.ToDouble(reader.GetString(5).Replace('.', ','));
-                                    point.Longitude = Convert.ToDouble(reader.GetString(6).Replace('.', ','));
+                                    point.Latitude = double.Parse(reader.GetString(5), CultureInfo.InvariantCulture);
+                                    point.Longitude = double.Parse(reader.GetString(6), CultureInfo.InvariantCulture);
                                     point.Description = reader.GetString(7);
                                     points.Add(point);
 
