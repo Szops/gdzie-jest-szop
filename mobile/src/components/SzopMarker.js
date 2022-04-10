@@ -8,16 +8,16 @@ import {View} from 'react-native';
 const SzopMarker = ({point}) => {
   const {updateMarker, displayMarker} = useContext(MarkerContext);
   const onPress = () => {
-    displayMarker('true');
+    displayMarker(true);
     updateMarker(point);
   };
   return (
     <Marker
+      onPress={onPress}
       coordinate={{
         latitude: point.latitude,
         longitude: point.longitude,
       }}
-<<<<<<< Updated upstream
       pinColor={point.isNotificationsEnabled ? 'green' : tintColor}>
       {/* Marker jest testowy, jak tylko zrobimy sensowne grafiki,to je podmienimy i zrobimy z tego ładny komponent */}
       <View style={{position: 'relative'}}>
@@ -37,10 +37,6 @@ const SzopMarker = ({point}) => {
         )}
       </View>
     </Marker>
-=======
-      pinColor={tintColor}
-      onPress={onPress}></Marker>
->>>>>>> Stashed changes
   );
 };
 

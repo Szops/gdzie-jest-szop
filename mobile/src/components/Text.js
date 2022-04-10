@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import {textDarkColor} from '../constants/colors';
+import {textDarkColor, textLightColor} from '../constants/colors';
 
 export const NormalText = styled.Text`
-  color: white;
+  color: ${textLightColor};
   font-size: 16px;
   font-weight: 100;
 `;

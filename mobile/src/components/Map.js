@@ -18,7 +18,7 @@ const Map = ({points, initialRegion}) => {
 
   return (
     <StyledMapView
-      onPress={() => displayMarker('false')}
+      onPress={() => displayMarker(false)}
       initialRegion={initialRegion}
       showsUserLocation={true}
       customMapStyle={customStyle}

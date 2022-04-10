@@ -8,7 +8,7 @@ const MarkerContextProvider = ({children}) => {
   const [navHidden, setNavHidden] = useState(false);
 
   const displayMarker = props => {
-    if (props == 'true') {
+    if (props === true) {
       setMarkerHidden(false);
       setNavHidden(true);
     } else {
