@@ -1,14 +1,19 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Marker} from 'react-native-maps';
+import {MarkerContext} from '../context/MarkerContextProvider';
 import {tintColor} from '../constants/colors';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {View} from 'react-native';
 
 const SzopMarker = ({point}) => {
+  const {updateMarker, displayMarker} = useContext(MarkerContext);
+  const onPress = () => {
+    displayMarker(true);
+    updateMarker(point);
+  };
   return (
     <Marker
-      title={point.street}
-      description={point.description}
+      onPress={onPress}
       coordinate={{
         latitude: point.latitude,
         longitude: point.longitude,
