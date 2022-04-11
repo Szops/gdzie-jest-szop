@@ -1,4 +1,4 @@
-import {StyleSheet, View, Text, SectionList, ScrollView} from 'react-native';
+import {View, Text, ScrollView} from 'react-native';
 import {HugeText} from './Text';
 import React, {useState} from 'react';
 import PointListItem from './PointListItem';
@@ -93,12 +93,6 @@ export default function PointsList({points, searchPhrase}) {
         renderHeader={_renderHeader}
         renderContent={_renderContent}
         onChange={_updateSections}
-        //showsHorizontalScrollIndicator={false}
-        //showsVerticalScrollIndicator={false}
-        //renderItem={({item}) => renderItem(item)}
-        //renderSectionHeader={({section: {title}}) => <HugeText>{title}</HugeText>}
-        //keyExtractor={item => item.pointId}
-        //style={{width: '100%'}}
       />
     </ScrollView>
   );
