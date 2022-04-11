@@ -32,6 +32,24 @@ export default function HelloSzopScreen() {
       .catch(error => alert(error.message));
   };
 
+  //ustawianie przypomnienia
+  //date - data przypomniania jako instancja Date
+  //pointName - nazwa punktu do wyświetlenia w powiadomieniu
+  const setNotification = (date, pointName) => {
+    Alert.alert('Dodano powiadomienie na godzine:', date.toString());
+    PushNotification.localNotificationSchedule({
+      channelId: 'szop-nt',
+      title: 'Przypomnienie o dostępności punktu',
+      message: 'Punkt o nazwie ' + pointName + ' będzie wkrótce dostępny!',
+      date: date,
+      allowWhileIdle: true,
+      soundName: 'notification_sound.wav',
+      sound: 'notification_sound.wav',
+      playSound: true,
+      vibrate: true,
+    });
+  };
+
   return (
     <ScreenWrapper home>
       <StyledScrollView
@@ -66,32 +84,19 @@ export default function HelloSzopScreen() {
         <Button
           title={'Test powiadomienia'}
           onPress={() => {
-            Alert.alert(
-              'Dodano powiadomienie na godzine:',
+            const today = new Date();
+            setNotification(
               new Date(
                 2022,
                 3,
-                4,
-                Number(input2) - 2,
-                Number(input),
-                0,
-                0,
-              ).toString(),
-            );
-            PushNotification.localNotificationSchedule({
-              channelId: 'szop-nt',
-              title: 'Test', // (optional)
-              message: 'Powiadomienie testowe', // (required)
-              date: new Date(
-                2022,
-                3,
-                4,
+                today.getDay(),
                 Number(input2) - 2,
                 Number(input),
                 0,
                 0,
               ),
-            });
+              'Punkt testowy',
+            );
           }}
         />
       </StyledScrollView>
