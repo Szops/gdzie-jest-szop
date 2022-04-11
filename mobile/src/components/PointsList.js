@@ -85,7 +85,7 @@ export default function PointsList({points, searchPhrase}) {
   ];
 
   return (
-    <ScrollView>
+    <ScrollView style={{width: '100%'}}>
       <Accordion
         activeSections={activeSections}
         sections={sections}
