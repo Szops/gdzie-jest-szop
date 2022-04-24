@@ -23,7 +23,7 @@ const ListImageWrapper = styled.View`
 
 function PointsListScreen({points}) {
   const [searchPhrase, setSearchPhrase] = useState('');
-
+  const updateInput = input => setSearchPhrase(input);
   return points === null ? (
     <LoadingScreen />
   ) : (
@@ -33,10 +33,7 @@ function PointsListScreen({points}) {
           source={image}
           resizeMode="cover"></StyledImageBackground>
       </ListImageWrapper>
-      <ListHeader
-        searchPhrase={searchPhrase}
-        setSearchPhrase={setSearchPhrase}
-      />
+      <ListHeader searchPhrase={searchPhrase} updateInput={updateInput} />
       <PointsList points={points} searchPhrase={searchPhrase} />
     </ScreenWrapper>
   );
