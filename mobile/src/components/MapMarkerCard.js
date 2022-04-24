@@ -40,8 +40,11 @@ const StyledRow = styled.View`
 
 export default function MapMarkerCard() {
   const {markerHidden, marker} = useContext(MarkerContext);
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  const toggleSwitch = async () => {
+    return marker.isNotificationsEnabled
+      ? await marker.turnOffNotifications()
+      : await marker.turnOnNotifications();
+  };
   return (
     <StyledMarkerCard markerHidden={markerHidden}>
       <StyledRow>
@@ -52,7 +55,7 @@ export default function MapMarkerCard() {
             trackColor={{false: switchFalse, true: tintColor}}
             thumbColor={thumbColor}
             onValueChange={toggleSwitch}
-            value={isEnabled}
+            value={marker.isNotificationsEnabled}
           />
         </StyledRow>
       </StyledRow>
