@@ -57,10 +57,10 @@ export default function HelloSzopScreen() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{flexGrow: 1}}>
         <HomeBanner textUpper={'GDZIE JEST'} textBottom={'SZOP?'} />
-        <HomeCard green />
-        <HomeCard />
-        <HomeCard />
-        <HomeCard last />
+        <HomeCard green header={text.tileHeader[0]} text={text.tileText[0]} />
+        <HomeCard header={text.tileHeader[1]} text={text.tileText[1]} />
+        <HomeCard header={text.tileHeader[2]} text={text.tileText[2]} />
+        <HomeCard header={text.tileHeader[3]} text={text.tileText[3]} last />
 
         {/* Przyciski tylko do demo, później zrobimy automatyczne pobieranie w useEffect */}
         <Button title="Pobierz bazę danych" onPress={updateDataabse} />
