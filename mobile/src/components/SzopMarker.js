@@ -24,7 +24,7 @@ const SzopMarker = ({point}) => {
         <Icon
           name="pets"
           // kolor będzie zależny od tego, czy w najbliższy, czasie będzie tu szop, ale tego jeszcze nie mamy, więc jest testowo po powiadomieniach
-          color={point.isNotificationsEnabled ? tintColor : 'black'}
+          color={point.isNotificationsEnabled ? tintColor : 'gray'}
           size={26}
         />
         {point.isNotificationsEnabled && (
