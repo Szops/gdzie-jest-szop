@@ -1,4 +1,4 @@
-import {Switch} from 'react-native';
+import {Switch, Alert} from 'react-native';
 import styled from 'styled-components';
 import {
   navDarkColor,
@@ -9,6 +9,7 @@ import {
 import {HugeText, NormalText} from './Text';
 import React, {useState, useContext} from 'react';
 import {MarkerContext} from '../context/MarkerContextProvider';
+import PushNotification from 'react-native-push-notification';
 
 const StyledMarkerCard = styled.View`
   height: 200px;
@@ -38,6 +39,23 @@ const StyledRow = styled.View`
   padding-bottom: 15px;
 `;
 
+//ustawianie przypomnienia
+//date - data przypomniania jako instancja Date
+//pointName - nazwa punktu do wyświetlenia w powiadomieniu
+const setNotification = (date, pointName) => {
+  PushNotification.localNotificationSchedule({
+    channelId: 'szop-nt',
+    title: 'Przypomnienie o dostępności punktu',
+    message: 'Punkt o nazwie ' + pointName + ' będzie wkrótce dostępny!',
+    date: date,
+    allowWhileIdle: true,
+    soundName: 'notification_sound.wav',
+    sound: 'notification_sound.wav',
+    playSound: true,
+    vibrate: true,
+  });
+};
+
 export default function MapMarkerCard() {
   const {markerHidden, marker} = useContext(MarkerContext);
   const toggleSwitch = async () => {
@@ -54,8 +72,12 @@ export default function MapMarkerCard() {
           <Switch
             trackColor={{false: switchFalse, true: tintColor}}
             thumbColor={thumbColor}
-            onValueChange={toggleSwitch}
+            onValueChange={() => {
+              toggleSwitch();
+              setNotification(new Date(Date.now() + 5 * 1000), 'Rynek 25');
+            }}
             value={marker.isNotificationsEnabled}
+            //marker.street
           />
         </StyledRow>
       </StyledRow>
