@@ -26,7 +26,7 @@ const StyledInput = styled.TextInput`
   background-color: ${temporaryNavColor};
 `;
 
-export const ListHeader = ({searchPhrase, setSearchPhrase}) => {
+export const ListHeader = ({searchPhrase, updateInput}) => {
   const {text} = useContext(LanguageContext);
   return (
     <StyledHeader>
@@ -34,7 +34,7 @@ export const ListHeader = ({searchPhrase, setSearchPhrase}) => {
       <StyledInput
         placeholder="Search"
         value={searchPhrase}
-        onChangeText={setSearchPhrase}
+        onChangeText={updateInput}
         placeholderTextColor="white"
       />
       <StyledLine />

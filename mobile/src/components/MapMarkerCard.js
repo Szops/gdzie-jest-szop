@@ -1,4 +1,4 @@
-import {Switch} from 'react-native';
+import {Switch, Alert} from 'react-native';
 import styled from 'styled-components';
 import {
   navDarkColor,
@@ -9,6 +9,7 @@ import {
 import {HugeText, NormalText} from './Text';
 import React, {useState, useContext} from 'react';
 import {MarkerContext} from '../context/MarkerContextProvider';
+import PushNotification from 'react-native-push-notification';
 
 const StyledMarkerCard = styled.View`
   height: 200px;
@@ -38,10 +39,42 @@ const StyledRow = styled.View`
   padding-bottom: 15px;
 `;
 
+//ustawianie przypomnienia
+//date - data przypomniania jako instancja Date
+//pointName - nazwa punktu do wyświetlenia w powiadomieniu
+const setNotification = (pointId, date, pointName) => {
+  PushNotification.localNotificationSchedule({
+    id: pointId,
+    channelId: 'szop-nt',
+    title: 'Your SZOP point is available',
+    message: 'SZOP point on ' + pointName + ' will be available soon!',
+    date: date,
+    allowWhileIdle: true,
+    soundName: 'notification_sound.wav',
+    sound: 'notification_sound.wav',
+    playSound: true,
+    vibrate: true,
+    repeatTime: 1,
+  });
+};
+
 export default function MapMarkerCard() {
   const {markerHidden, marker} = useContext(MarkerContext);
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  const toggleSwitch = async () => {
+    if (marker.isNotificationsEnabled) {
+      PushNotification.cancelLocalNotification(marker.pointId);
+      await marker.turnOffNotifications();
+    } else {
+      setNotification(
+        marker.pointId,
+        new Date(Date.now() + 15 * 1000),
+        marker.street,
+      );
+      await marker.turnOnNotifications();
+    }
+
+    PushNotification.getScheduledLocalNotifications(console.log);
+  };
   return (
     <StyledMarkerCard markerHidden={markerHidden}>
       <StyledRow>
@@ -51,8 +84,12 @@ export default function MapMarkerCard() {
           <Switch
             trackColor={{false: switchFalse, true: tintColor}}
             thumbColor={thumbColor}
-            onValueChange={toggleSwitch}
-            value={isEnabled}
+            onValueChange={() => {
+              toggleSwitch();
+
+              //do demo (pokazowe powiadomienie)
+            }}
+            value={marker.isNotificationsEnabled}
           />
         </StyledRow>
       </StyledRow>
