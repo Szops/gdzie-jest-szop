@@ -1,5 +1,5 @@
 {
-  "appName": "GdzieJestSZOP",
+  "appName": "Gdzie Jest SZOP?",
   "loading": "Loading",
   "pointsList": "Points list",
   "pointsMap": "Points map",
@@ -8,5 +8,4 @@
   "pointsTitle": "All points",
   "tileHeader": "ABOUT\nTHE\nPROJECT",
   "tileText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut laboreet dolore magna aliqua."
-
 }

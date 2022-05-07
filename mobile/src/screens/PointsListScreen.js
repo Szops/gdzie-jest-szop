@@ -23,7 +23,6 @@ const ListImageWrapper = styled.View`
 
 function PointsListScreen({points}) {
   const [searchPhrase, setSearchPhrase] = useState('');
-
   return points === null ? (
     <LoadingScreen />
   ) : (
