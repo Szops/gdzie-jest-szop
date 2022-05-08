@@ -7,7 +7,7 @@ import {
   thumbColor,
 } from '../constants/colors';
 import {HugeText, NormalText} from './Text';
-import React, {useState, useContext} from 'react';
+import React, {useContext} from 'react';
 import {MarkerContext} from '../context/MarkerContextProvider';
 import PushNotification from 'react-native-push-notification';
 
@@ -75,6 +75,7 @@ export default function MapMarkerCard() {
 
     PushNotification.getScheduledLocalNotifications(console.log);
   };
+
   return (
     <StyledMarkerCard markerHidden={markerHidden}>
       <StyledRow>
