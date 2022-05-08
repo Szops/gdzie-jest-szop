@@ -26,7 +26,7 @@ export default function HelloSzopScreen() {
     await PointsDAO.deleteAllLists();
     await getPoints()
       .then(points =>
-        PointsDAO.createSzopPointsList({version: 'unknown', list: points}),
+        PointsDAO.createSzopPointsList({version: 'test', list: points}),
       )
       .catch(error => alert(error.message));
   };
