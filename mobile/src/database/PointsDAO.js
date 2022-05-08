@@ -1,4 +1,5 @@
 import {database} from './db';
+import {Q} from '@nozbe/watermelondb';
 
 const pointsLists = database.collections.get('points_lists');
 const points = database.collections.get('points');
@@ -9,6 +10,11 @@ const listNames = {SZOP: 'szop', PSZOK: 'pszok'};
 export default {
   getPointsLists: () => pointsLists.query(),
   getPoints: () => points.query(),
+
+  getSzopPointsList: () =>
+    pointsLists.query(
+      Q.where('name', Q.like(`%${Q.sanitizeLikeString(listNames.SZOP)}%`)),
+    ),
 
   createSzopPointsList: async ({version, list}) => {
     await database.write(async () => {
