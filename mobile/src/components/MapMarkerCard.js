@@ -48,12 +48,14 @@ export default function MapMarkerCard() {
       await marker.turnOnNotifications();
     }
   };
+
   useEffect(() => {
     if (marker.openingDates != undefined)
       marker.openingDates
         .fetch()
         .then(dates => setDates(dates.map(date => date.date)));
   }, [marker]);
+
   return (
     <StyledMarkerCard markerHidden={markerHidden}>
       <StyledRow>

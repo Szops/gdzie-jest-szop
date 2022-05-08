@@ -7,10 +7,13 @@ import {View} from 'react-native';
 
 const SzopMarker = ({point}) => {
   const {updateMarker, displayMarker} = useContext(MarkerContext);
+
   const onPress = () => {
     displayMarker(true);
+    point.isFocused = true;
     updateMarker(point);
   };
+
   return (
     <Marker
       onPress={onPress}
@@ -24,8 +27,14 @@ const SzopMarker = ({point}) => {
         <Icon
           name="pets"
           // kolor będzie zależny od tego, czy w najbliższy, czasie będzie tu szop, ale tego jeszcze nie mamy, więc jest testowo po powiadomieniach
-          color={point.isNotificationsEnabled ? tintColor : 'gray'}
-          size={26}
+          color={
+            point.isFocused
+              ? 'white'
+              : point.isNotificationsEnabled
+              ? tintColor
+              : 'gray'
+          }
+          size={point.isFocused ? 30 : 26}
         />
         {point.isNotificationsEnabled && (
           <Icon
