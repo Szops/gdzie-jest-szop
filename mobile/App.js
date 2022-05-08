@@ -17,6 +17,7 @@ import {PermissionsAndroid, Alert} from 'react-native';
 import LoadingScreen from './src/screens/LoadingScreen';
 import {getVersion, getPoints} from './src/api/szopPoints';
 import PointsDAO from './src/database/PointsDAO';
+import NotificationManager from './src/utils/NotificationManager';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(false);
@@ -116,6 +117,7 @@ export default function App() {
         translucent={false}
         backgroundColor={tintColor}
       />
+      <NotificationManager />
       <LanguageContextProvider>
         <MarkerContextProvider>
           {isLoading ? <LoadingScreen /> : <MainTabNavigator />}
