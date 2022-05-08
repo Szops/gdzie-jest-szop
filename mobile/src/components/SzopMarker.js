@@ -35,8 +35,7 @@ const SzopMarker = ({point}) => {
           color={
             dates.some(
               date =>
-                date.toLocaleDateString() ===
-                new Date(Date.now()).toLocaleDateString(),
+                date > Date.now() && date < new Date(Date.now() + 86400000),
             )
               ? tintColor
               : 'gray'
