@@ -11,7 +11,6 @@ import React, {useState, useEffect, useContext} from 'react';
 import {MarkerContext} from '../context/MarkerContextProvider';
 
 const StyledMarkerCard = styled.View`
-  /* height: 200px; */
   width: 100%;
   background-color: ${navDarkColor};
   border-top-left-radius: 25px;
@@ -74,13 +73,17 @@ export default function MapMarkerCard() {
           />
         </StyledRow>
       </StyledRow>
-      <HugeText>{marker.street}</HugeText>
+      <HugeText>Address: {marker.street}</HugeText>
       <NormalText>{marker.description}</NormalText>
-      {dates
-        .filter(date => date > Date.now())
-        .map(date => (
-          <NormalText key={date}>{date.toLocaleString()}</NormalText>
-        ))}
+      <NormalText>Nearest schedule:</NormalText>
+      <StyledRow>
+        {dates
+          .filter(date => date > Date.now())
+          .slice(0, 2)
+          .map(date => (
+            <NormalText key={date}>{date.toLocaleString()}</NormalText>
+          ))}
+      </StyledRow>
     </StyledMarkerCard>
   );
 }
