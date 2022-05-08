@@ -10,8 +10,6 @@ import PointsDAO from '../database/PointsDAO';
 export const mapScreenName = 'MapScreen';
 
 const MapScreen = ({points}) => {
-  const [shouldLoadMap, setShouldLoadMap] = useState(false);
-
   const {text} = useContext(LanguageContext);
 
   const initialRegion = {
@@ -23,19 +21,8 @@ const MapScreen = ({points}) => {
 
   return (
     <ScreenWrapper>
-      {shouldLoadMap ? (
-        <>
-          <Map points={points} initialRegion={initialRegion} />
-          <MapMarkerCard></MapMarkerCard>
-        </>
-      ) : (
-        <Button
-          title={text.loadTheMap}
-          onPress={() => {
-            setShouldLoadMap(true);
-          }}
-        />
-      )}
+      <Map points={points} initialRegion={initialRegion} />
+      <MapMarkerCard />
     </ScreenWrapper>
   );
 };

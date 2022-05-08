@@ -7,12 +7,11 @@ import {
   thumbColor,
 } from '../constants/colors';
 import {HugeText, NormalText} from './Text';
-import React, {useContext} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {MarkerContext} from '../context/MarkerContextProvider';
-import PushNotification from 'react-native-push-notification';
 
 const StyledMarkerCard = styled.View`
-  height: 200px;
+  /* height: 200px; */
   width: 100%;
   background-color: ${navDarkColor};
   border-top-left-radius: 25px;
@@ -39,42 +38,23 @@ const StyledRow = styled.View`
   padding-bottom: 15px;
 `;
 
-//ustawianie przypomnienia
-//date - data przypomniania jako instancja Date
-//pointName - nazwa punktu do wyświetlenia w powiadomieniu
-const setNotification = (pointId, date, pointName) => {
-  PushNotification.localNotificationSchedule({
-    id: pointId,
-    channelId: 'szop-nt',
-    title: 'Your SZOP point is available',
-    message: 'SZOP point on ' + pointName + ' will be available soon!',
-    date: date,
-    allowWhileIdle: true,
-    soundName: 'notification_sound.wav',
-    sound: 'notification_sound.wav',
-    playSound: true,
-    vibrate: true,
-    repeatTime: 1,
-  });
-};
-
 export default function MapMarkerCard() {
+  const [dates, setDates] = useState([]);
   const {markerHidden, marker} = useContext(MarkerContext);
   const toggleSwitch = async () => {
     if (marker.isNotificationsEnabled) {
-      PushNotification.cancelLocalNotification(marker.pointId);
       await marker.turnOffNotifications();
     } else {
-      setNotification(
-        marker.pointId,
-        new Date(Date.now() + 15 * 1000),
-        marker.street,
-      );
       await marker.turnOnNotifications();
     }
-
-    PushNotification.getScheduledLocalNotifications(console.log);
   };
+
+  useEffect(() => {
+    if (marker.openingDates != undefined)
+      marker.openingDates
+        .fetch()
+        .then(dates => setDates(dates.map(date => date.date)));
+  }, [marker]);
 
   return (
     <StyledMarkerCard markerHidden={markerHidden}>
@@ -96,6 +76,11 @@ export default function MapMarkerCard() {
       </StyledRow>
       <HugeText>{marker.street}</HugeText>
       <NormalText>{marker.description}</NormalText>
+      {dates
+        .filter(date => date > Date.now())
+        .map(date => (
+          <NormalText key={date}>{date.toLocaleString()}</NormalText>
+        ))}
     </StyledMarkerCard>
   );
 }
