@@ -14,6 +14,7 @@ import MarkerContextProvider from './src/context/MarkerContextProvider';
 import LanguageContextProvider from './src/context/LanguageContextProvider';
 import {useEffect} from 'react';
 import {PermissionsAndroid, Alert} from 'react-native';
+import NotificationManager from './src/utils/NotificationManager';
 
 export default function App() {
   useEffect(() => {
@@ -44,6 +45,7 @@ export default function App() {
         translucent={false}
         backgroundColor={tintColor}
       />
+      <NotificationManager />
       <LanguageContextProvider>
         <MarkerContextProvider>
           <MainTabNavigator />

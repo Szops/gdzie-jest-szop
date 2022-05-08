@@ -41,7 +41,7 @@ export default class PointsList extends Model {
         pointData.openingDateTimes.map(async date => {
           let b = date.split(/\D+/);
           --b[1]; // month {0, ... , 11}, not {1, ... , 12}
-          await this.callWriter(() => point.addOpeningDate(Date.UTC(...b)));
+          await this.callWriter(() => point.addOpeningDate(new Date(...b)));
         }),
       );
     });
