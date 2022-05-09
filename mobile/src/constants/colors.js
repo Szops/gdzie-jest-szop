@@ -18,3 +18,7 @@ export const homeImageColor = '#3A3A3A';
 //switch
 export const switchFalse = '#767577';
 export const thumbColor = '#f4f3f4';
+
+//icon collapse
+
+export const iconColor = '#888888';

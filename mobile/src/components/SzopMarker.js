@@ -8,18 +8,22 @@ import {View} from 'react-native';
 const SzopMarker = ({point}) => {
   const {updateMarker, displayMarker} = useContext(MarkerContext);
   const [dates, setDates] = useState([]);
+
   const onPress = () => {
     displayMarker(true);
+    point.isFocused = true;
     updateMarker(point);
     console.log(Date.now());
     console.log(dates);
   };
+  
   useEffect(() => {
     if (point.openingDates != undefined)
       point.openingDates
         .fetch()
         .then(dates => setDates(dates.map(date => date.date)));
   }, [point]);
+
   return (
     <Marker
       onPress={onPress}
@@ -40,7 +44,7 @@ const SzopMarker = ({point}) => {
               ? tintColor
               : 'gray'
           }
-          size={26}
+          size={point.isFocused ? 30 : 26}
         />
         {point.isNotificationsEnabled && (
           <Icon
