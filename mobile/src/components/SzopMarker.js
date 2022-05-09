@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {Marker} from 'react-native-maps';
 import {MarkerContext} from '../context/MarkerContextProvider';
 import {tintColor} from '../constants/colors';
@@ -7,12 +7,22 @@ import {View} from 'react-native';
 
 const SzopMarker = ({point}) => {
   const {updateMarker, displayMarker} = useContext(MarkerContext);
+  const [dates, setDates] = useState([]);
 
   const onPress = () => {
     displayMarker(true);
     point.isFocused = true;
     updateMarker(point);
+    console.log(Date.now());
+    console.log(dates);
   };
+  
+  useEffect(() => {
+    if (point.openingDates != undefined)
+      point.openingDates
+        .fetch()
+        .then(dates => setDates(dates.map(date => date.date)));
+  }, [point]);
 
   return (
     <Marker
@@ -26,11 +36,11 @@ const SzopMarker = ({point}) => {
       <View style={{position: 'relative'}}>
         <Icon
           name="pets"
-          // kolor będzie zależny od tego, czy w najbliższy, czasie będzie tu szop, ale tego jeszcze nie mamy, więc jest testowo po powiadomieniach
           color={
-            point.isFocused
-              ? 'white'
-              : point.isNotificationsEnabled
+            dates.some(
+              date =>
+                date > Date.now() && date < new Date(Date.now() + 86400000),
+            )
               ? tintColor
               : 'gray'
           }
