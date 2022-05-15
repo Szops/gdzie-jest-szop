@@ -5,8 +5,7 @@ export const CardWrapper = styled.View`
   padding: 10px 5px 10px 15px;
   margin: 8px 10px 8px 10px;
   width: 90%;
-  left: 10%;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
 `;
 

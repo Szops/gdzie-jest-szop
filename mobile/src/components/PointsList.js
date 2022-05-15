@@ -93,6 +93,7 @@ export default function PointsList({points, searchPhrase}) {
         renderHeader={_renderHeader}
         renderContent={_renderContent}
         onChange={_updateSections}
+        collapsed={false}
       />
     </ScrollView>
   );
