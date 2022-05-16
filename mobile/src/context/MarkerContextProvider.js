@@ -14,14 +14,11 @@ const MarkerContextProvider = ({children}) => {
     } else {
       setMarkerHidden(true);
       setNavHidden(false);
-      marker.isFocused = false;
     }
   };
 
   const updateMarker = point => {
-    marker.isFocused = false;
     setMarker(point);
-    point.isFocused = true;
   };
 
   return (
