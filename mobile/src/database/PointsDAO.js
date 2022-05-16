@@ -16,6 +16,14 @@ export default {
       Q.where('name', Q.like(`%${Q.sanitizeLikeString(listNames.SZOP)}%`)),
     ),
 
+  getSzopPoints: () =>
+    points.query(
+      Q.on(
+        'points_lists',
+        Q.where('name', Q.like(`%${Q.sanitizeLikeString(listNames.SZOP)}%`)),
+      ),
+    ),
+
   createSzopPointsList: async ({version, list}) => {
     await database.write(async () => {
       await pointsLists
@@ -24,9 +32,9 @@ export default {
           pointsList.name = listNames.SZOP;
           return pointsList;
         })
-        .then(pointsList => {
+        .then(async pointsList => {
           //   if (list !== undefined)
-          Promise.all(
+          return await Promise.all(
             list.map(async point => {
               await pointsList.callWriter(() => pointsList.addPoint(point));
             }),
@@ -37,9 +45,23 @@ export default {
 
   deleteAllLists: async () => {
     await database.write(async () => {
-      await openingDates.query().destroyAllPermanently();
-      await points.query().destroyAllPermanently();
+      // database.unsafeResetDatabase();
+      // await openingDates.query().destroyAllPermanently();
+      // await points.query().destroyAllPermanently();
       await pointsLists.query().destroyAllPermanently();
+    });
+  },
+
+  deleteSzopLists: async () => {
+    await database.write(async () => {
+      // database.unsafeResetDatabase();
+      // await openingDates.query().destroyAllPermanently();
+      // await points.query().destroyAllPermanently();
+      await pointsLists
+        .query(
+          Q.where('name', Q.like(`%${Q.sanitizeLikeString(listNames.SZOP)}%`)),
+        )
+        .destroyAllPermanently();
     });
   },
 };

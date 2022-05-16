@@ -43,4 +43,8 @@ export default class Point extends Model {
       openingDate.date = date;
     });
   }
+  async destroyPermanently() {
+    await this.openingDates.destroyAllPermanently();
+    await super.destroyPermanently();
+  }
 }

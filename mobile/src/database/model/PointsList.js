@@ -35,7 +35,7 @@ export default class PointsList extends Model {
       point.latitude = pointData.latitude;
       point.longitude = pointData.longitude;
       point.description = pointData.description;
-      point.isNotificationsEnabled = false;
+      point.isNotificationsEnabled = pointData.isNotificationsEnabled;
 
       Promise.all(
         pointData.openingDateTimes.map(async date => {
@@ -45,5 +45,10 @@ export default class PointsList extends Model {
         }),
       );
     });
+  }
+
+  async destroyPermanently() {
+    await this.points.destroyAllPermanently();
+    await super.destroyPermanently();
   }
 }

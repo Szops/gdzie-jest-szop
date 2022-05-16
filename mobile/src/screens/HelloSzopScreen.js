@@ -20,17 +20,6 @@ export default function HelloSzopScreen() {
   const {text, selectedLanguage, setSelectedLanguage} =
     useContext(LanguageContext);
 
-  const deleteDataabse = async () => await PointsDAO.deleteAllLists();
-
-  const updateDataabse = async () => {
-    await PointsDAO.deleteAllLists();
-    await getPoints()
-      .then(points =>
-        PointsDAO.createSzopPointsList({version: 'test', list: points}),
-      )
-      .catch(error => alert(error.message));
-  };
-
   return (
     <ScreenWrapper home>
       <StyledScrollView
@@ -42,10 +31,6 @@ export default function HelloSzopScreen() {
         <HomeCard header={text.tileHeader[1]} text={text.tileText[1]} />
         <HomeCard header={text.tileHeader[2]} text={text.tileText[2]} />
         <HomeCard header={text.tileHeader[3]} text={text.tileText[3]} last />
-
-        <Button title="Pobierz bazę danych" onPress={updateDataabse} />
-        {/* Przyciski tylko do demo, później zrobimy automatyczne pobieranie w useEffect */}
-        {/* <Button title="Usuń bazę danych" onPress={deleteDataabse} /> */}
       </StyledScrollView>
       {/*<HugeText>{text.appName}</HugeText>
       <Button
