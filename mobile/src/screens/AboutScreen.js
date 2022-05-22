@@ -30,10 +30,6 @@ export default function AboutScreen() {
           cardText={text.aboutText[0]}
         />
         <AboutNamesCard header={text.aboutText[1]} text={text.aboutText[2]} />
-        {/* <AboutCard
-          header={'This app is open-source'}
-          text={'Check it out on GitHub!'}
-        /> */}
       </StyledScrollView>
     </ScreenWrapper>
   );
