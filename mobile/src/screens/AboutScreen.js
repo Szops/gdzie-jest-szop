@@ -3,11 +3,8 @@ import React, {useContext} from 'react';
 import {LanguageContext} from '../context/LanguageContextProvider';
 import {ScreenWrapper} from '../components/Wrapper';
 import {AboutCard} from '../components/AboutCard';
-import {AboutNames} from '../components/AboutNames';
-import {HomeBanner} from '../components/HomeBanner';
-import {TextInput, Button, Alert} from 'react-native';
-import {getPoints} from '../api/szopPoints';
-import PointsDAO from '../database/PointsDAO';
+import {AboutNamesCard} from '../components/AboutNamesCard';
+
 export const AboutScreenName = 'AboutScreen';
 
 const StyledScrollView = styled.ScrollView`
@@ -30,9 +27,13 @@ export default function AboutScreen() {
         <AboutCard
           green
           header={text.aboutHeader[0]}
-          text={text.aboutText[0]}
+          cardText={text.aboutText[0]}
         />
-        <AboutNames text={text.aboutText[1]} />
+        <AboutNamesCard header={text.aboutText[1]} text={text.aboutText[2]} />
+        {/* <AboutCard
+          header={'This app is open-source'}
+          text={'Check it out on GitHub!'}
+        /> */}
       </StyledScrollView>
     </ScreenWrapper>
   );

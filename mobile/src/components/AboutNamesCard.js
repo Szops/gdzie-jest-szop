@@ -2,7 +2,9 @@ import styled from 'styled-components';
 import React, {useContext} from 'react';
 import {LanguageContext} from '../context/LanguageContextProvider';
 import {darkTileColor, darkTintColor} from '../constants/colors';
-import {TileText} from '../components/Text';
+import {TileHeader, TileText} from './Text';
+import Icon from 'react-native-vector-icons/EvilIcons';
+import {Linking} from 'react-native';
 
 const AboutWrapper = styled.View`
   background: ${darkTileColor};
@@ -13,9 +15,17 @@ const AboutWrapper = styled.View`
   padding: 20px;
 `;
 
-export const AboutNames = ({green, last, text}) => {
+const TitleWrapper = styled.View`
+  width: 100%;
+  padding-bottom: 10px;
+`;
+
+export const AboutNamesCard = ({header, text}) => {
   return (
-    <AboutWrapper green={green} last={last}>
+    <AboutWrapper>
+      <TitleWrapper>
+        <TileHeader>{header}</TileHeader>
+      </TitleWrapper>
       <TileText>{text}</TileText>
     </AboutWrapper>
   );
