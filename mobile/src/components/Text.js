@@ -28,6 +28,7 @@ export const Title = styled.Text`
 export const TileHeader = styled.Text`
   font-size: 35px;
   color: white;
+  width: 65%;
   font-weight: 700;
 `;
 
