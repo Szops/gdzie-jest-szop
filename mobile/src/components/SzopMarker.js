@@ -6,14 +6,11 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {View} from 'react-native';
 
 const SzopMarker = ({point}) => {
-  const {updateMarker, displayMarker} = useContext(MarkerContext);
+  const {updateMarker, displayMarker, marker} = useContext(MarkerContext);
   const [dates, setDates] = useState([]);
   const onPress = () => {
     displayMarker(true);
-    point.isFocused = true;
     updateMarker(point);
-    console.log(Date.now());
-    console.log(dates);
   };
 
   useEffect(() => {
@@ -35,14 +32,16 @@ const SzopMarker = ({point}) => {
         <Icon
           name="pets"
           color={
-            dates.some(
-              date =>
-                date > Date.now() && date < new Date(Date.now() + 86400000),
-            )
+            point.id === marker.id
+              ? 'white'
+              : dates.some(
+                  date =>
+                    date > Date.now() && date < new Date(Date.now() + 86400000),
+                )
               ? tintColor
               : 'gray'
           }
-          size={point.isFocused ? 30 : 26}
+          size={point.id === marker.id ? 30 : 26}
         />
         {point.isNotificationsEnabled && (
           <Icon

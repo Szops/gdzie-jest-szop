@@ -1,4 +1,5 @@
 import React, {useContext} from 'react';
+import NewsScreen, {NewsScreenName} from '../screens/NewsScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -74,6 +75,16 @@ export default function MainTabNavigator() {
             tabBarIcon: ({color}) => (
               <Icon name="list" color={color} size={26} />
             ),
+          }}
+        />
+        <Tab.Screen
+          name={NewsScreenName}
+          component={NewsScreen}
+          options={{
+            title: text.pointsList,
+            tabBarIcon: ({color}) => (
+              <Icon name="web" color={color} size={26} />
+              ),
           }}
         />
         <Tab.Screen
