@@ -44,12 +44,6 @@ export default function MapMarkerCard() {
   const [dates, setDates] = useState([]);
   const {markerHidden, marker} = useContext(MarkerContext);
 
-  //tymczasowe dla personalizacji powiadomień
-  const {offset} = useContext(NotificationContext);
-  const {setOffset} = useContext(NotificationContext);
-  const {muted} = useContext(NotificationContext);
-  const {setMuted} = useContext(NotificationContext);
-
   const toggleSwitch = async () => {
     if (marker.isNotificationsEnabled) {
       await marker.turnOffNotifications();
@@ -57,14 +51,6 @@ export default function MapMarkerCard() {
       await marker.turnOnNotifications();
     }
     PushNotification.getScheduledLocalNotifications(console.log);
-  };
-
-  const toggleSwitchMuted = () => {
-    if (muted) {
-      setMuted(false);
-    } else {
-      setMuted(true);
-    }
   };
 
   useEffect(() => {
@@ -79,31 +65,6 @@ export default function MapMarkerCard() {
       <StyledRow>
         <StyledIcon></StyledIcon>
         <StyledRow>
-          {/*Tymczasowy input dla personalizacji powiadomień*/}
-          <Switch
-            trackColor={{false: switchFalse, true: tintColor}}
-            value={muted}
-            onValueChange={() => {
-              toggleSwitchMuted();
-            }}
-            tintColors={{true: tintColor}}
-            label="Wycisz"
-          />
-          <TextInput
-            value={offset.toString()}
-            placeholder="15"
-            keyboardType="numeric"
-            style={{
-              color: {tintColor},
-              backgroundColor: 'white',
-              padding: 0,
-              margin: 10,
-            }}
-            onChangeText={text => {
-              setOffset(Number(text));
-            }}
-          />
-
           <NormalText>Reminder:</NormalText>
           <Switch
             trackColor={{false: switchFalse, true: tintColor}}

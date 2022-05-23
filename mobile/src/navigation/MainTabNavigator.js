@@ -8,6 +8,7 @@ import HelloSzopScreen, {helloSzopScreenName} from '../screens/HelloSzopScreen';
 import PointsListScreen, {
   PointsListScreenName,
 } from '../screens/PointsListScreen';
+import SettingsScreen, {SettingsScreenName} from '../screens/SettingsScreen';
 import MarkerContextProvider, {
   MarkerContext,
 } from '../context/MarkerContextProvider';
@@ -94,6 +95,16 @@ export default function MainTabNavigator() {
             title: text.about,
             tabBarIcon: ({color}) => (
               <Icon name="info" color={color} size={26} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name={SettingsScreenName}
+          component={SettingsScreen}
+          options={{
+            title: text.appName,
+            tabBarIcon: ({color}) => (
+              <Icon name="settings" color={color} size={26} />
             ),
           }}
         />
