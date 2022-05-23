@@ -1,13 +1,17 @@
 import {View, Text, ScrollView} from 'react-native';
 import {HugeText} from './Text';
-import React, {useState} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import PointListItem from './PointListItem';
 import Accordion from 'react-native-collapsible/Accordion';
 import {CardWrapper, SectionWrapper} from './Wrapper';
+import {LanguageContext} from '../context/LanguageContextProvider';
+import {navDarkColor} from '../constants/colors';
 
 export default function PointsList({points, searchPhrase}) {
   const renderItem = item => <PointListItem point={item} />;
   const [activeSections, setActiveSections] = useState([]);
+  const {text, selectedLanguage, setSelectedLanguage} =
+    useContext(LanguageContext);
 
   const _updateSections = activeSections => {
     setActiveSections(activeSections);
@@ -43,7 +47,7 @@ export default function PointsList({points, searchPhrase}) {
 
   const sections = [
     {
-      title: 'Wybrane',
+      title: text.listSelected,
       content: points
         .filter(p => p.isNotificationsEnabled == 1)
         .filter(p =>
@@ -93,7 +97,7 @@ export default function PointsList({points, searchPhrase}) {
         renderHeader={_renderHeader}
         renderContent={_renderContent}
         onChange={_updateSections}
-        collapsed={false}
+        underlayColor={navDarkColor}
       />
     </ScrollView>
   );

@@ -13,6 +13,7 @@ import MarkerContextProvider, {
 } from '../context/MarkerContextProvider';
 import MapScreen, {mapScreenName} from '../screens/MapScreen';
 import {LanguageContext} from '../context/LanguageContextProvider';
+import AboutScreen, {AboutScreenName} from '../screens/AboutScreen';
 
 const Tab = createBottomTabNavigator();
 const darkTheme = {
@@ -83,6 +84,16 @@ export default function MainTabNavigator() {
             title: text.pointsList,
             tabBarIcon: ({color}) => (
               <Icon name="web" color={color} size={26} />
+              ),
+          }}
+        />
+        <Tab.Screen
+          name={AboutScreenName}
+          component={AboutScreen}
+          options={{
+            title: text.about,
+            tabBarIcon: ({color}) => (
+              <Icon name="info" color={color} size={26} />
             ),
           }}
         />

@@ -8,7 +8,6 @@ import {View} from 'react-native';
 const SzopMarker = ({point}) => {
   const {updateMarker, displayMarker, marker} = useContext(MarkerContext);
   const [dates, setDates] = useState([]);
-
   const onPress = () => {
     displayMarker(true);
     updateMarker(point);
@@ -20,7 +19,6 @@ const SzopMarker = ({point}) => {
         .fetch()
         .then(dates => setDates(dates.map(date => date.date)));
   }, [point]);
-
   return (
     <Marker
       onPress={onPress}
