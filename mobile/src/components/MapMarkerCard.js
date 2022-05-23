@@ -1,5 +1,4 @@
 import {Switch, Alert} from 'react-native';
-import CheckBox from 'react-native-checkbox';
 import styled from 'styled-components';
 import {
   navDarkColor,
