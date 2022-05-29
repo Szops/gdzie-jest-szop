@@ -14,15 +14,13 @@ import {NotificationContext} from '../context/NotificationContextProvider';
 import PushNotification from 'react-native-push-notification';
 
 const StyledMarkerCard = styled.View`
-  width: 100%;
   background-color: ${navDarkColor};
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
-  position: absolute;
-  bottom: 0;
   transition-delay: 1s;
   display: ${props => (props.markerHidden ? 'none' : 'flex')};
   padding: 30px;
+  width: 100%;
 `;
 
 const StyledIcon = styled.View`
