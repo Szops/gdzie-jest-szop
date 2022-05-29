@@ -5,10 +5,11 @@ import styled from 'styled-components';
 import {MarkerContext} from '../context/MarkerContextProvider';
 import SzopMarker from './SzopMarker';
 import {customStyle} from '../constants/mapStyle';
+import {navDarkColor, darkTintColor} from '../constants/colors';
 
 const StyledMapView = styled(MapView)`
   width: 100%;
-  height: 100%;
+  flex: 1;
 `;
 
 const Map = ({points, initialRegion}) => {
@@ -43,7 +44,10 @@ const Map = ({points, initialRegion}) => {
       showsUserLocation={true}
       customMapStyle={customStyle}
       followsUserLocation={true}
-      showsMyLocationButton={true}>
+      showsMyLocationButton={true}
+      loadingEnabled={true}
+      loadingBackgroundColor={navDarkColor}
+      loadingIndicatorColor={darkTintColor}>
       {points && renderMarkers()}
     </StyledMapView>
   );
