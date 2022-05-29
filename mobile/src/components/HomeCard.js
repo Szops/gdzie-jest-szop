@@ -4,7 +4,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {LanguageContext} from '../context/LanguageContextProvider';
 import {darkTileColor, darkTintColor} from '../constants/colors';
-import {TileHeader, TileText} from '../components/Text';
+import {SmallText, TileHeader, TileText} from '../components/Text';
+import {View, TouchableOpacity} from 'react-native';
 
 const HomeWrapper = styled.View`
   background: ${props => (props.green ? darkTintColor : darkTileColor)};
@@ -26,14 +27,27 @@ const TitleWrapper = styled.View`
   padding-bottom: 20px;
 `;
 
-export const HomeCard = ({green, last, header, text, iconName}) => {
+export const HomeCard = ({
+  green,
+  last,
+  header,
+  text,
+  iconName,
+  onPress,
+  readMore,
+}) => {
   return (
-    <HomeWrapper green={green} last={last}>
+    <HomeWrapper
+      as={onPress ? TouchableOpacity : View}
+      green={green}
+      last={last}
+      onPress={onPress}>
       <TitleWrapper>
         <Icon name={iconName} size={70} />
         <TileHeader>{header}</TileHeader>
       </TitleWrapper>
       <TileText>{text}</TileText>
+      {readMore && <SmallText>{readMore}</SmallText>}
     </HomeWrapper>
   );
 };

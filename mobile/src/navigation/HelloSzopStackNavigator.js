@@ -11,7 +11,7 @@ export const helloSzopStackNavigatorName = 'HelloSzopStackNavigator';
 const Stack = createNativeStackNavigator();
 const HelloSzopStackNavigator = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name={helloSzopScreenName} component={HelloSzopScreen} />
       <Stack.Screen name={SettingsScreenName} component={SettingsScreen} />
       <Stack.Screen name={AboutScreenName} component={AboutScreen} />
