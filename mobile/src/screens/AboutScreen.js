@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import React, {useContext} from 'react';
 import {LanguageContext} from '../context/LanguageContextProvider';
-import {ScreenWrapper} from '../components/Wrapper';
+import {CardWrapper, ScreenWrapper} from '../components/Wrapper';
 import {AboutCard} from '../components/AboutCard';
 import {AboutNamesCard} from '../components/AboutNamesCard';
+import LicensesList from '../components/LicensesList';
 
 export const AboutScreenName = 'AboutScreen';
 
@@ -30,6 +31,9 @@ export default function AboutScreen() {
           cardText={text.aboutText[0]}
         />
         <AboutNamesCard header={text.aboutText[1]} text={text.aboutText[2]} />
+        <CardWrapper>
+          <LicensesList />
+        </CardWrapper>
       </StyledScrollView>
     </ScreenWrapper>
   );
