@@ -8,7 +8,7 @@ export const NormalText = styled.Text`
 `;
 
 export const SmallText = styled.Text`
-  color: ${textDarkColor};
+  color: ${textLightColor};
   font-size: 12px;
 `;
 

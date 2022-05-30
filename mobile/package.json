@@ -16,6 +16,7 @@
     "@react-native-community/geolocation": "^2.0.2",
     "@react-navigation/bottom-tabs": "^6.2.0",
     "@react-navigation/native": "^6.0.8",
+    "@react-navigation/native-stack": "^6.6.2",
     "npm-license-crawler": "^0.2.1",
     "react": "17.0.2",
     "react-native": "0.67.3",
