@@ -4,6 +4,7 @@ import {textDarkColor, textLightColor} from '../constants/colors';
 export const NormalText = styled.Text`
   color: ${textLightColor};
   font-size: 16px;
+  flex-shrink: 1;
   font-weight: 100;
 `;
 
@@ -28,7 +29,8 @@ export const Title = styled.Text`
 export const TileHeader = styled.Text`
   font-size: 35px;
   color: white;
-  width: 65%;
+  flex-shrink: 1;
+  padding-left: 30px;
   font-weight: 700;
 `;
 
