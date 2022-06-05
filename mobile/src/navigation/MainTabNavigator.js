@@ -8,12 +8,16 @@ import HelloSzopScreen, {helloSzopScreenName} from '../screens/HelloSzopScreen';
 import PointsListScreen, {
   PointsListScreenName,
 } from '../screens/PointsListScreen';
+import SettingsScreen, {SettingsScreenName} from '../screens/SettingsScreen';
 import MarkerContextProvider, {
   MarkerContext,
 } from '../context/MarkerContextProvider';
 import MapScreen, {mapScreenName} from '../screens/MapScreen';
 import {LanguageContext} from '../context/LanguageContextProvider';
 import AboutScreen, {AboutScreenName} from '../screens/AboutScreen';
+import HelloSzopStackNavigator, {
+  helloSzopStackNavigatorName,
+} from './HelloSzopStackNavigator';
 
 const Tab = createBottomTabNavigator();
 const darkTheme = {
@@ -48,8 +52,10 @@ export default function MainTabNavigator() {
           headerShown: false,
         }}>
         <Tab.Screen
-          name={helloSzopScreenName}
-          component={HelloSzopScreen}
+          // name={helloSzopScreenName}
+          // component={HelloSzopScreen}
+          name={helloSzopStackNavigatorName}
+          component={HelloSzopStackNavigator}
           options={{
             title: text.appName,
             tabBarIcon: ({color}) => (
@@ -77,7 +83,7 @@ export default function MainTabNavigator() {
             ),
           }}
         />
-        <Tab.Screen
+        {/* <Tab.Screen
           name={NewsScreenName}
           component={NewsScreen}
           options={{
@@ -97,6 +103,16 @@ export default function MainTabNavigator() {
             ),
           }}
         />
+        <Tab.Screen
+          name={SettingsScreenName}
+          component={SettingsScreen}
+          options={{
+            title: text.appName,
+            tabBarIcon: ({color}) => (
+              <Icon name="settings" color={color} size={26} />
+            ),
+          }}
+        /> */}
       </Tab.Navigator>
     </NavigationContainer>
   );
