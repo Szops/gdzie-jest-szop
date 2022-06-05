@@ -5,8 +5,8 @@ export const CardWrapper = styled.View`
   background: ${darkTileColor};
   border-radius: 25px;
   elevation: 7;
-  margin-top: 10%;
-  margin-bottom: 0px;
+  margin-top: 4%;
+  margin-bottom: 4%;
   padding: 20px;
   padding-bottom: 10px;
 `;

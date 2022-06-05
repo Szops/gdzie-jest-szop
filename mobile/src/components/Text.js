@@ -40,3 +40,10 @@ export const TileText = styled.Text`
   line-height: 30px;
   font-weight: 300;
 `;
+
+export const HugeTextList = styled.Text`
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  margin-top: 20%;
+`;

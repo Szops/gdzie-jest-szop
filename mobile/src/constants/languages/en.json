@@ -5,7 +5,7 @@
   "pointsMap": "Points map",
   "language": "Language",
   "loadTheMap": "Load the map",
-  "pointsTitle": "All points",
+  "pointsTitle": "Your points",
   "tileHeader": ["ABOUT THE PROJECT",
                  "THE ECOLOGY OF RECYCLING",
                  "BETTER LIFE IN WROCŁAW",
@@ -19,5 +19,6 @@
               "OUR TEAM",
               " Michał Przytarski \n Miłosz Tarka \n Maciej Lendzion \n Stanisław Karpisiak"],
   "listSelected": "Selected",
-  "gitIcon": "Click here to check it out on GitHub!"
+  "gitIcon": "Click here to check it out on GitHub!",
+  "listEmpty": "Points you select will appear here"
 }
