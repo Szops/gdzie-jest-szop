@@ -1,5 +1,4 @@
 import {Switch, Alert} from 'react-native';
-import CheckBox from 'react-native-checkbox';
 import styled from 'styled-components';
 import {
   navDarkColor,
@@ -15,15 +14,13 @@ import {NotificationContext} from '../context/NotificationContextProvider';
 import PushNotification from 'react-native-push-notification';
 
 const StyledMarkerCard = styled.View`
-  width: 100%;
   background-color: ${navDarkColor};
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
-  position: absolute;
-  bottom: 0;
   transition-delay: 1s;
   display: ${props => (props.markerHidden ? 'none' : 'flex')};
   padding: 30px;
+  width: 100%;
 `;
 
 const StyledIcon = styled.View`
@@ -36,6 +33,7 @@ const StyledIcon = styled.View`
 const StyledRow = styled.View`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   padding-bottom: 15px;
@@ -45,12 +43,6 @@ export default function MapMarkerCard() {
   const [dates, setDates] = useState([]);
   const {markerHidden, marker} = useContext(MarkerContext);
 
-  //tymczasowe dla personalizacji powiadomień
-  const {offset} = useContext(NotificationContext);
-  const {setOffset} = useContext(NotificationContext);
-  const {muted} = useContext(NotificationContext);
-  const {setMuted} = useContext(NotificationContext);
-
   const toggleSwitch = async () => {
     if (marker.isNotificationsEnabled) {
       await marker.turnOffNotifications();
@@ -58,14 +50,6 @@ export default function MapMarkerCard() {
       await marker.turnOnNotifications();
     }
     PushNotification.getScheduledLocalNotifications(console.log);
-  };
-
-  const toggleSwitchMuted = () => {
-    if (muted) {
-      setMuted(false);
-    } else {
-      setMuted(true);
-    }
   };
 
   useEffect(() => {
@@ -80,31 +64,6 @@ export default function MapMarkerCard() {
       <StyledRow>
         <StyledIcon></StyledIcon>
         <StyledRow>
-          {/*Tymczasowy input dla personalizacji powiadomień*/}
-          <Switch
-            trackColor={{false: switchFalse, true: tintColor}}
-            value={muted}
-            onValueChange={() => {
-              toggleSwitchMuted();
-            }}
-            tintColors={{true: tintColor}}
-            label="Wycisz"
-          />
-          <TextInput
-            value={offset.toString()}
-            placeholder="15"
-            keyboardType="numeric"
-            style={{
-              color: {tintColor},
-              backgroundColor: 'white',
-              padding: 0,
-              margin: 10,
-            }}
-            onChangeText={text => {
-              setOffset(Number(text));
-            }}
-          />
-
           <NormalText>Reminder:</NormalText>
           <Switch
             trackColor={{false: switchFalse, true: tintColor}}

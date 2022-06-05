@@ -2,11 +2,13 @@ import styled from 'styled-components';
 import {darkTileColor} from '../constants/colors';
 
 export const CardWrapper = styled.View`
-  padding: 10px 5px 10px 15px;
-  margin: 8px 10px 8px 10px;
-  width: 90%;
-  flex-direction: column;
-  justify-content: space-between;
+  background: ${darkTileColor};
+  border-radius: 25px;
+  elevation: 7;
+  margin-top: 4%;
+  margin-bottom: 4%;
+  padding: 20px;
+  padding-bottom: 10px;
 `;
 
 export const SectionWrapper = styled.View`
