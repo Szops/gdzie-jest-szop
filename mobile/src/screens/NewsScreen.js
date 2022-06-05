@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React, {useEffect} from 'react';
-import {HugeText} from '../components/Text';
+import {HugeText, Title} from '../components/Text';
 import {ArticleTile} from '../components/ArticleTile';
 import {ScreenWrapper} from '../components/Wrapper';
 
@@ -8,6 +8,20 @@ export const NewsScreenName = 'NewsScreen';
 
 const StyledScrollView = styled.ScrollView`
   width: 90%;
+`;
+
+const StyledLine = styled.View`
+  border-bottom-color: grey;
+  border-bottom-width: 1px;
+  width: 85%;
+  left: 5%;
+`;
+
+const StyledHeader = styled.View`
+  padding-top: 30px;
+  padding-left: 5%;
+  width: 100%;
+  justify-content: space-around;
 `;
 
 export default function NewsScreen() {
@@ -35,6 +49,8 @@ export default function NewsScreen() {
   return (
     <ScreenWrapper home>
       <StyledScrollView>
+        <Title>Environmental news</Title>
+        <StyledLine />
         {articles.map(article => (
           <ArticleTile
             text={article.title}

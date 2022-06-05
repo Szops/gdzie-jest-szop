@@ -16,6 +16,12 @@
         "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
         "parents": "gdziejestszop"
     },
+    "@react-navigation/native-stack": {
+        "licenses": "MIT",
+        "repository": "https://github.com/react-navigation/react-navigation",
+        "licenseUrl": "https://github.com/react-navigation/react-navigation/raw/master/LICENSE",
+        "parents": "gdziejestszop"
+    },
     "@react-navigation/native": {
         "licenses": "MIT",
         "repository": "https://github.com/react-navigation/react-navigation",

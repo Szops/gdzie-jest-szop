@@ -21,7 +21,6 @@ const HomeWrapper = styled.View`
 const TitleWrapper = styled.View`
   display: flex;
   flex-direction: row;
-  width: 90%;
   align-items: center;
   justify-content: space-between;
   padding-bottom: 20px;

@@ -33,6 +33,7 @@ const StyledIcon = styled.View`
 const StyledRow = styled.View`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   padding-bottom: 15px;
