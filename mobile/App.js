@@ -20,7 +20,7 @@ import NotificationManager from './src/utils/NotificationManager';
 import DatabaseSyncManager from './src/utils/DatabaseSyncManager';
 
 export default function App() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const requestLocationPermission = async () => {
@@ -56,12 +56,12 @@ export default function App() {
           <LoadingScreen />
         ) : (
           <>
-          <NotificationContextProvider>
-            <NotificationManager />
-            <MarkerContextProvider>
-              <MainTabNavigator />
-            </MarkerContextProvider>
-          </NotificationContextProvider>
+            <NotificationContextProvider>
+              <NotificationManager />
+              <MarkerContextProvider>
+                <MainTabNavigator />
+              </MarkerContextProvider>
+            </NotificationContextProvider>
           </>
         )}
       </LanguageContextProvider>
