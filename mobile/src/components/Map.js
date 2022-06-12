@@ -45,9 +45,10 @@ const Map = ({points, initialRegion}) => {
       customMapStyle={customStyle}
       followsUserLocation={true}
       showsMyLocationButton={true}
-      loadingEnabled={true}
-      loadingBackgroundColor={navDarkColor}
-      loadingIndicatorColor={darkTintColor}>
+      // loadingEnabled={true}
+      // loadingBackgroundColor={navDarkColor}
+      // loadingIndicatorColor={darkTintColor}
+    >
       {points && renderMarkers()}
     </StyledMapView>
   );

@@ -54,7 +54,7 @@ const NotificationManager = ({points}) => {
 
   useEffect(() => {
     syncNotifications();
-  }, [points]);
+  }, [points, offset, muted]);
 
   return <View />;
 };
