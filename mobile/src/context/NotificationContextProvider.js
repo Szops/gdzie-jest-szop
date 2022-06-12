@@ -23,14 +23,19 @@ const NotificationContextProvider = ({children}) => {
   useEffect(() => {
     database.localStorage
       .get('notifications_muted')
-      .then(setMuted)
+      .then(notificationsMuted => {
+        if (notificationsMuted === undefined) setMuted(false);
+        else setMuted(notificationsMuted);
+      })
       .catch(e => Alert.alert(e.message));
+
     database.localStorage
       .get('notifications_offset')
-      .then(setOffset)
+      .then(notificationsOffset => {
+        if (notificationsOffset === undefined) setOffset(30);
+        else setOffset(notificationsOffset);
+      })
       .catch(e => Alert.alert(e.message));
-    if (offset === undefined) setOffset(30);
-    if (muted === undefined) setMuted(false);
   }, []);
 
   useEffect(() => {
