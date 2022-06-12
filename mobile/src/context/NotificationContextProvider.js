@@ -29,6 +29,8 @@ const NotificationContextProvider = ({children}) => {
       .get('notifications_offset')
       .then(setOffset)
       .catch(e => Alert.alert(e.message));
+    if (offset === undefined) setOffset(30);
+    if (muted === undefined) setMuted(false);
   }, []);
 
   useEffect(() => {
