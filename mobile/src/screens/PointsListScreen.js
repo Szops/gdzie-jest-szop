@@ -47,7 +47,7 @@ function PointsListScreen({points}) {
 }
 
 export default withObservables(['points'], ({points}) => ({
-  points: PointsDAO.getPoints().observeWithColumns([
+  points: PointsDAO.getSzopPoints().observeWithColumns([
     'is_notifications_enabled',
   ]),
 }))(PointsListScreen);

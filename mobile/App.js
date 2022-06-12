@@ -7,7 +7,7 @@
  */
 
 import React, {useState} from 'react';
-import {SafeAreaView, StatusBar, ToastAndroid} from 'react-native';
+import {SafeAreaView, StatusBar} from 'react-native';
 import MainTabNavigator from './src/navigation/MainTabNavigator';
 import {tintColor, navDarkColor} from './src/constants/colors';
 import MarkerContextProvider from './src/context/MarkerContextProvider';
@@ -16,79 +16,11 @@ import LanguageContextProvider from './src/context/LanguageContextProvider';
 import {useEffect} from 'react';
 import {PermissionsAndroid, Alert} from 'react-native';
 import LoadingScreen from './src/screens/LoadingScreen';
-import {getVersion, getPoints} from './src/api/szopPoints';
-import PointsDAO from './src/database/PointsDAO';
 import NotificationManager from './src/utils/NotificationManager';
+import DatabaseSyncManager from './src/utils/DatabaseSyncManager';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(false);
-
-  const checkIsDataVersionSync = async () => {
-    let v;
-    return getVersion()
-      .then(version => {
-        v = version;
-        return PointsDAO.getPointsLists().fetch();
-      })
-      .then(lists => {
-        let test = false;
-        if (lists.length === 0) test = true;
-        else
-          lists.map(list => {
-            if (list.version !== v) test = true;
-          });
-        return {test, v};
-      });
-  };
-
-  const addNewPoints = async version => {
-    return PointsDAO.deleteAllLists()
-      .then(() => {
-        return getPoints();
-      })
-      .then(points => {
-        return PointsDAO.createSzopPointsList({
-          version: version,
-          list: points,
-        });
-      });
-  };
-
-  const checkDataSync = async () => {
-    setIsLoading(true);
-    checkIsDataVersionSync()
-      .then(({test, v}) => {
-        if (test) {
-          ToastAndroid.showWithGravity(
-            'Pobieranie danych',
-            ToastAndroid.SHORT,
-            ToastAndroid.CENTER,
-          );
-          return addNewPoints(v);
-        } else {
-          ToastAndroid.showWithGravity(
-            'Dane aktualne',
-            ToastAndroid.SHORT,
-            ToastAndroid.CENTER,
-          );
-        }
-      })
-      .catch(err => {
-        ToastAndroid.showWithGravityAndOffset(
-          err.message,
-          ToastAndroid.LONG,
-          ToastAndroid.BOTTOM,
-        );
-        console.error(err.message);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  };
-
-  useEffect(() => {
-    checkDataSync();
-  }, []);
 
   useEffect(() => {
     const requestLocationPermission = async () => {
@@ -118,15 +50,21 @@ export default function App() {
         translucent={false}
         backgroundColor={tintColor}
       />
-      <NotificationContextProvider>
-        <NotificationManager />
-
-        <LanguageContextProvider>
-          <MarkerContextProvider>
-            {isLoading ? <LoadingScreen /> : <MainTabNavigator />}
-          </MarkerContextProvider>
-        </LanguageContextProvider>
-      </NotificationContextProvider>
+      <LanguageContextProvider>
+        <DatabaseSyncManager setIsLoading={setIsLoading} />
+        {isLoading ? (
+          <LoadingScreen />
+        ) : (
+          <>
+          <NotificationContextProvider>
+            <NotificationManager />
+            <MarkerContextProvider>
+              <MainTabNavigator />
+            </MarkerContextProvider>
+          </NotificationContextProvider>
+          </>
+        )}
+      </LanguageContextProvider>
     </SafeAreaView>
   );
 }

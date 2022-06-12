@@ -25,17 +25,6 @@ export default function HelloSzopScreen({navigation}) {
   const {text, selectedLanguage, setSelectedLanguage} =
     useContext(LanguageContext);
 
-  const deleteDataabse = async () => await PointsDAO.deleteAllLists();
-
-  const updateDataabse = async () => {
-    await PointsDAO.deleteAllLists();
-    await getPoints()
-      .then(points =>
-        PointsDAO.createSzopPointsList({version: 'test', list: points}),
-      )
-      .catch(error => alert(error.message));
-  };
-
   return (
     <ScreenWrapper home>
       <StyledScrollView
