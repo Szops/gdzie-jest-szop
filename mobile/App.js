@@ -11,6 +11,7 @@ import {SafeAreaView, StatusBar} from 'react-native';
 import MainTabNavigator from './src/navigation/MainTabNavigator';
 import {tintColor, navDarkColor} from './src/constants/colors';
 import MarkerContextProvider from './src/context/MarkerContextProvider';
+import NotificationContextProvider from './src/context/NotificationContextProvider';
 import LanguageContextProvider from './src/context/LanguageContextProvider';
 import {useEffect} from 'react';
 import {PermissionsAndroid, Alert} from 'react-native';
@@ -55,10 +56,12 @@ export default function App() {
           <LoadingScreen />
         ) : (
           <>
+          <NotificationContextProvider>
             <NotificationManager />
             <MarkerContextProvider>
               <MainTabNavigator />
             </MarkerContextProvider>
+          </NotificationContextProvider>
           </>
         )}
       </LanguageContextProvider>

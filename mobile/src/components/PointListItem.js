@@ -1,4 +1,4 @@
-import {Switch, View} from 'react-native';
+import {Switch, View, Pressable} from 'react-native';
 import {HugeText, NormalText} from './Text';
 import {CardWrapper} from './Wrapper';
 import styled from 'styled-components';
@@ -33,34 +33,38 @@ export default function PointListItem({point}) {
       ? await point.turnOffNotifications()
       : await point.turnOnNotifications();
   };
+
   return (
     <CardWrapper>
-      <StyledCardRow>
-        <Icon
-          name={visible ? 'keyboard-arrow-up' : 'keyboard-arrow-down'}
-          size={30}
-          color={iconColor}
-        />
+      <Pressable onPress={() => setVisible(!visible)}>
+        <StyledCardRow>
+          <Icon
+            name={visible ? 'keyboard-arrow-up' : 'keyboard-arrow-down'}
+            size={30}
+            color={iconColor}
+          />
 
-        <HugeText onPress={() => setVisible(!visible)}>{point.street}</HugeText>
-        <Switch
-          trackColor={{false: switchFalse, true: tintColor}}
-          thumbColor={thumbColor}
-          onValueChange={toggleSwitch}
-          value={point.isNotificationsEnabled}
-        />
-      </StyledCardRow>
-      {visible && (
-        <>
-          <NormalText>{point.description}</NormalText>
-          {dates
-            .filter(date => date > Date.now())
-            .slice(0, 2)
-            .map(date => (
-              <NormalText key={date}>{date.toLocaleString()}</NormalText>
-            ))}
-        </>
-      )}
+          <HugeText>{point.street}</HugeText>
+          <Switch
+            trackColor={{false: switchFalse, true: tintColor}}
+            thumbColor={thumbColor}
+            onValueChange={toggleSwitch}
+            value={point.isNotificationsEnabled}
+          />
+        </StyledCardRow>
+
+        {visible && (
+          <>
+            <NormalText>{point.description}</NormalText>
+            {dates
+              .filter(date => date > Date.now())
+              .slice(0, 2)
+              .map(date => (
+                <NormalText key={date}>{date.toLocaleString()}</NormalText>
+              ))}
+          </>
+        )}
+      </Pressable>
     </CardWrapper>
   );
 }

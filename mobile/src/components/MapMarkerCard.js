@@ -9,17 +9,18 @@ import {
 import {HugeText, NormalText} from './Text';
 import React, {useState, useEffect, useContext} from 'react';
 import {MarkerContext} from '../context/MarkerContextProvider';
+import {TextInput} from 'react-native-gesture-handler';
+import {NotificationContext} from '../context/NotificationContextProvider';
+import PushNotification from 'react-native-push-notification';
 
 const StyledMarkerCard = styled.View`
-  width: 100%;
   background-color: ${navDarkColor};
   border-top-left-radius: 25px;
   border-top-right-radius: 25px;
-  position: absolute;
-  bottom: 0;
   transition-delay: 1s;
   display: ${props => (props.markerHidden ? 'none' : 'flex')};
   padding: 30px;
+  width: 100%;
 `;
 
 const StyledIcon = styled.View`
@@ -32,6 +33,7 @@ const StyledIcon = styled.View`
 const StyledRow = styled.View`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   padding-bottom: 15px;
@@ -40,12 +42,14 @@ const StyledRow = styled.View`
 export default function MapMarkerCard() {
   const [dates, setDates] = useState([]);
   const {markerHidden, marker} = useContext(MarkerContext);
+
   const toggleSwitch = async () => {
     if (marker.isNotificationsEnabled) {
       await marker.turnOffNotifications();
     } else {
       await marker.turnOnNotifications();
     }
+    PushNotification.getScheduledLocalNotifications(console.log);
   };
 
   useEffect(() => {
