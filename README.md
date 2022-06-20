@@ -1,10 +1,7 @@
 # GdzieJestSZOP
 
-&NewLine;
-***
-___
-## Adobe XD UI project
-✅ Wireframe\
-✅ Mockup\
-🚧 Hi-fi prototype\
-https://xd.adobe.com/view/e985b2c9-220a-4d03-9fb9-8c38f75333b5-bcd6/
+GdzieJestSZOP is a mobile app designed for Android and build with React Native. The main purpose of the appis to make finding [SZOP points](https://ekosystem.wroc.pl/segregacja-odpadow/szop/) in Wrocław easier.
+
+## Run code
+
+Instructions how to run the code are included in _README.md_ in _mobile_ and _api_ folders.
